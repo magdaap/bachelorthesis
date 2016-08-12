@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E08ADD0A1D5460C4004D9E9F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E08ADD091D5460C4004D9E9F /* main.cpp */; };
+		E08ADD121D54B190004D9E9F /* circularDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E08ADD101D54B190004D9E9F /* circularDisplay.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		E08ADD061D5460C4004D9E9F /* bachelorthesis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = bachelorthesis; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08ADD091D5460C4004D9E9F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		E08ADD101D54B190004D9E9F /* circularDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = circularDisplay.cpp; sourceTree = "<group>"; };
+		E08ADD111D54B190004D9E9F /* circularDisplay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = circularDisplay.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +41,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E027A6031D5DDE40001660A3 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E08ADD091D5460C4004D9E9F /* main.cpp */,
+				E027A6051D5DDE5C001660A3 /* categories */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		E027A6051D5DDE5C001660A3 /* categories */ = {
+			isa = PBXGroup;
+			children = (
+				E08ADD101D54B190004D9E9F /* circularDisplay.cpp */,
+				E08ADD111D54B190004D9E9F /* circularDisplay.hpp */,
+			);
+			name = categories;
+			sourceTree = "<group>";
+		};
 		E08ADCFD1D5460C4004D9E9F = {
 			isa = PBXGroup;
 			children = (
@@ -57,7 +78,7 @@
 		E08ADD081D5460C4004D9E9F /* bachelorthesis */ = {
 			isa = PBXGroup;
 			children = (
-				E08ADD091D5460C4004D9E9F /* main.cpp */,
+				E027A6031D5DDE40001660A3 /* src */,
 			);
 			path = bachelorthesis;
 			sourceTree = "<group>";
@@ -119,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E08ADD0A1D5460C4004D9E9F /* main.cpp in Sources */,
+				E08ADD121D54B190004D9E9F /* circularDisplay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,9 +184,30 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lopencv_calib3d",
+					"-lopencv_core",
+					"-lopencv_features2d",
+					"-lopencv_flann",
+					"-lopencv_highgui",
+					"-lopencv_imgcodecs",
+					"-lopencv_imgproc",
+					"-lopencv_ml",
+					"-lopencv_objdetect",
+					"-lopencv_photo",
+					"-lopencv_shape",
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_ts",
+					"-lopencv_video",
+					"-lopencv_videoio",
+					"-lopencv_videostab",
+				);
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -200,8 +243,29 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-lopencv_calib3d",
+					"-lopencv_core",
+					"-lopencv_features2d",
+					"-lopencv_flann",
+					"-lopencv_highgui",
+					"-lopencv_imgcodecs",
+					"-lopencv_imgproc",
+					"-lopencv_ml",
+					"-lopencv_objdetect",
+					"-lopencv_photo",
+					"-lopencv_shape",
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_ts",
+					"-lopencv_video",
+					"-lopencv_videoio",
+					"-lopencv_videostab",
+				);
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -239,6 +303,7 @@
 				E08ADD0F1D5460C4004D9E9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
