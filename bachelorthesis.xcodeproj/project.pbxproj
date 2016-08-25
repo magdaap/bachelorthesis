@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E027A60C1D6F1C5C001660A3 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E027A60A1D6F1C5C001660A3 /* Utils.cpp */; };
 		E08ADD0A1D5460C4004D9E9F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E08ADD091D5460C4004D9E9F /* main.cpp */; };
 		E08ADD121D54B190004D9E9F /* circularDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E08ADD101D54B190004D9E9F /* circularDisplay.cpp */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E027A6081D6EE2DD001660A3 /* analogesMessgeraet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = analogesMessgeraet.jpg; sourceTree = "<group>"; };
+		E027A60A1D6F1C5C001660A3 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
+		E027A60B1D6F1C5C001660A3 /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
 		E08ADD061D5460C4004D9E9F /* bachelorthesis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = bachelorthesis; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08ADD091D5460C4004D9E9F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E08ADD101D54B190004D9E9F /* circularDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = circularDisplay.cpp; sourceTree = "<group>"; };
@@ -44,7 +48,10 @@
 		E027A6031D5DDE40001660A3 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				E027A60A1D6F1C5C001660A3 /* Utils.cpp */,
+				E027A60B1D6F1C5C001660A3 /* Utils.hpp */,
 				E08ADD091D5460C4004D9E9F /* main.cpp */,
+				E027A6091D6EE2E6001660A3 /* resources */,
 				E027A6051D5DDE5C001660A3 /* categories */,
 			);
 			name = src;
@@ -57,6 +64,14 @@
 				E08ADD111D54B190004D9E9F /* circularDisplay.hpp */,
 			);
 			name = categories;
+			sourceTree = "<group>";
+		};
+		E027A6091D6EE2E6001660A3 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				E027A6081D6EE2DD001660A3 /* analogesMessgeraet.jpg */,
+			);
+			name = resources;
 			sourceTree = "<group>";
 		};
 		E08ADCFD1D5460C4004D9E9F = {
@@ -140,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E08ADD0A1D5460C4004D9E9F /* main.cpp in Sources */,
+				E027A60C1D6F1C5C001660A3 /* Utils.cpp in Sources */,
 				E08ADD121D54B190004D9E9F /* circularDisplay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,6 +172,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_OPTIMIZATION_PROFILE_FILE = "";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -221,6 +238,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_OPTIMIZATION_PROFILE_FILE = "";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -273,6 +291,7 @@
 		E08ADD0E1D5460C4004D9E9F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -280,6 +299,7 @@
 		E08ADD0F1D5460C4004D9E9F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -294,7 +314,7 @@
 				E08ADD0C1D5460C4004D9E9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		E08ADD0D1D5460C4004D9E9F /* Build configuration list for PBXNativeTarget "bachelorthesis" */ = {
 			isa = XCConfigurationList;
@@ -303,7 +323,7 @@
 				E08ADD0F1D5460C4004D9E9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

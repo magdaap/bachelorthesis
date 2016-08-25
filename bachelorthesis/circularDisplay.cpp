@@ -12,19 +12,22 @@
 
 using namespace cv;
 
-void CircularDisplay::showImages(Mat src, Mat evol){
-    
-    namedWindow("Src", WINDOW_AUTOSIZE );
-    imshow("Src", src);
-    namedWindow("Evolved", WINDOW_AUTOSIZE );
-    imshow("Evolved", evol);
-    waitKey(0);
-};
 
-Mat CircularDisplay::getLine(Mat img){
-    Mat after;
- //   HoughLines(img, after, 30, 80, 1);
-    HoughLinesP(img, after, 10, 50, 1);
-    return after;
+Mat CircularDisplay::getLine(Mat img, double rho, double theta){
+    Mat dest,edges;
+    std::vector<Vec4i> lines;
+
+    Canny(img,edges,50,200,3, true);
+    cvtColor(edges, dest, CV_GRAY2BGR);
+    HoughLinesP(edges, lines, 1, CV_PI/180, 50, 50, 10);
+
+    for( size_t i = 0; i < lines.size(); i++ )
+    {
+        Vec4i l = lines[i];
+
+        line( dest, Point(l[0], l[1]), Point(l[2], l[3]), Scalar(0,0,255), 3, 8, 0);
+
+    }
+    return dest;
 
 };

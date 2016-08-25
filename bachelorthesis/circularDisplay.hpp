@@ -14,9 +14,10 @@
 
 using namespace cv;
 class CircularDisplay {
-    CircularDisplay(){};
-    public: static void showImages(Mat src, Mat evo);
-    public: static Mat getLine(Mat img);
+    
+            CircularDisplay(){};
+    
+    public: static Mat getLine(Mat img, double rho, double theta);
     
 };
 
