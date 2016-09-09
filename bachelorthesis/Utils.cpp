@@ -9,10 +9,14 @@
 #include "Utils.hpp"
 
 
-void Utils::showImages(Mat src, Mat evol){
-    namedWindow("Src", WINDOW_AUTOSIZE );
-    imshow("Src", src);
-    namedWindow("Evolved", WINDOW_AUTOSIZE );
-    imshow("Evolved", evol);
-    waitKey(0);
+void Utils::showImages(std::vector<Mat> imgs, std::string title){
+
+    for( size_t i = 0; i < imgs.size(); i++ ){
+   //     std::cout << i << std::endl;
+        imshow(std::to_string(i)+ title, imgs[i]);
+      
+        
+    }
+    
 };
+

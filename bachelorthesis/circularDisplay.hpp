@@ -15,9 +15,11 @@
 using namespace cv;
 class CircularDisplay {
     
-            CircularDisplay(){};
+    CircularDisplay(){};
     
-    public: static Mat getLine(Mat img, double rho, double theta);
+public: static  std::vector<Mat> analyseCircular(Mat img);
+    static Mat getLines(Mat img, Point p);
+    static Mat getShape(Mat img);
     
 };
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0186C721D7413F60078AE01 /* digitDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0186C701D7413F60078AE01 /* digitDisplay.cpp */; };
 		E027A60C1D6F1C5C001660A3 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E027A60A1D6F1C5C001660A3 /* Utils.cpp */; };
 		E08ADD0A1D5460C4004D9E9F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E08ADD091D5460C4004D9E9F /* main.cpp */; };
 		E08ADD121D54B190004D9E9F /* circularDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E08ADD101D54B190004D9E9F /* circularDisplay.cpp */; };
@@ -25,6 +26,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E0186C701D7413F60078AE01 /* digitDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = digitDisplay.cpp; sourceTree = "<group>"; };
+		E0186C711D7413F60078AE01 /* digitDisplay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = digitDisplay.hpp; sourceTree = "<group>"; };
 		E027A6081D6EE2DD001660A3 /* analogesMessgeraet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = analogesMessgeraet.jpg; sourceTree = "<group>"; };
 		E027A60A1D6F1C5C001660A3 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		E027A60B1D6F1C5C001660A3 /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
@@ -62,6 +65,8 @@
 			children = (
 				E08ADD101D54B190004D9E9F /* circularDisplay.cpp */,
 				E08ADD111D54B190004D9E9F /* circularDisplay.hpp */,
+				E0186C701D7413F60078AE01 /* digitDisplay.cpp */,
+				E0186C711D7413F60078AE01 /* digitDisplay.hpp */,
 			);
 			name = categories;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0186C721D7413F60078AE01 /* digitDisplay.cpp in Sources */,
 				E08ADD0A1D5460C4004D9E9F /* main.cpp in Sources */,
 				E027A60C1D6F1C5C001660A3 /* Utils.cpp in Sources */,
 				E08ADD121D54B190004D9E9F /* circularDisplay.cpp in Sources */,

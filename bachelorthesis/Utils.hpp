@@ -14,9 +14,8 @@
 
 using namespace cv;
 class Utils {
-    
     Utils(){};
-    public: static void showImages(Mat src, Mat evo);
+public: static void showImages(std::vector<Mat> srcs, std::string title);
 };
 
 #endif /* Utils_hpp */
