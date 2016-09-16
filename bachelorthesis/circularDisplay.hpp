@@ -19,7 +19,6 @@ class CircularDisplay {
     
 public: static  std::vector<Mat> analyseCircular(Mat img);
     static Mat getLines(Mat img, Point p);
-    static Mat getShape(Mat img);
     
 };
 
