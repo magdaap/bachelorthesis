@@ -10,11 +10,11 @@
 
 
 void Utils::showImages(std::vector<Mat> imgs, std::string title){
-
+    
     for( size_t i = 0; i < imgs.size(); i++ ){
-   //     std::cout << i << std::endl;
+        //     std::cout << i << std::endl;
         imshow(std::to_string(i)+ title, imgs[i]);
-      
+        
         
     }
     
@@ -50,6 +50,6 @@ void Utils::getVideo(){
      
      
      };*/
-
+    
 }
 

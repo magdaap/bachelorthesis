@@ -20,17 +20,17 @@ class CircularDisplay : public Category {
        
     
 public: CircularDisplay();
-
+    
     std::vector<Mat> analyse(Mat img);
-     Mat getLines(Mat img, Point p);
-     void setCircleMiddle(Point point1, Point point2, Point point3);
-     void setCircleRadius(Point middle, Point lin);
+    Mat getLines(Mat img, Point p);
+    void setCircleMiddle(Point point1, Point point2, Point point3);
+    void setCircleRadius(Point middle, Point lin);
 private:
     Point middle;
     Vec4i pointer;
     int radius;
     double amount;
-
+    
     
 };
 

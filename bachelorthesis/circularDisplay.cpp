@@ -57,12 +57,12 @@ void CircularDisplay::setCircleRadius(Point middle, Point lin){
 
 std::vector<Mat> CircularDisplay::analyse(Mat img){
     std::vector<Mat> dest;
-
+    
     Mat lines, c, res, src;
     char k, a;
     Point p;
     img.copyTo(src);
-     img.copyTo(res);
+    img.copyTo(res);
     while (true){
         imshow("analyseCircular", img);
         imshow("result", res);
@@ -71,7 +71,7 @@ std::vector<Mat> CircularDisplay::analyse(Mat img){
         k = waitKey(0);
         if (k == 'q'){
             break;
-        
+            
         } else if (k == 'c'){
             c = Mat(img.rows, img.cols, CV_8UC1);
             CircularDisplay::setCircleMiddle(p1, p2, p3);
@@ -86,11 +86,11 @@ std::vector<Mat> CircularDisplay::analyse(Mat img){
             imshow("c", c);
             waitKey(0);
             a = waitKey(0);
-
+            
             if (a == 'y'){
                 bitwise_not(src, res);
                 bitwise_and(res, c, res);
-               // GaussianBlur( res, res, Size(9,9), 6, 6);
+                // GaussianBlur( res, res, Size(9,9), 6, 6);
                 Canny(res,res,50,100,3, true);
                 src.copyTo(img);
                 
@@ -101,7 +101,7 @@ std::vector<Mat> CircularDisplay::analyse(Mat img){
             if (a == 'y'){
                 pointer = {p1.x,p1.y,p2.x,p2.y};
             }
-         }
+        }
     };
     dest.push_back(img);
     dest.push_back(lines);
@@ -117,7 +117,7 @@ Mat CircularDisplay::getLines(Mat img, Point p){
     
     cvtColor(edges, dest, CV_GRAY2BGR);
     HoughLinesP(edges, lines, 1, CV_PI/180, 100, 10, 5);
-
+    
     
     for( size_t i = 0; i < lines.size(); i++ )
     {
