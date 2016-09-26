@@ -11,14 +11,26 @@
 
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
+#include "category.hpp"
 
 using namespace cv;
-class CircularDisplay {
+class CircularDisplay : public Category {
     
-    CircularDisplay(){};
     
-public: static  std::vector<Mat> analyseCircular(Mat img);
-    static Mat getLines(Mat img, Point p);
+       
+    
+public: CircularDisplay();
+
+    std::vector<Mat> analyse(Mat img);
+     Mat getLines(Mat img, Point p);
+     void setCircleMiddle(Point point1, Point point2, Point point3);
+     void setCircleRadius(Point middle, Point lin);
+private:
+    Point middle;
+    Vec4i pointer;
+    int radius;
+    double amount;
+
     
 };
 

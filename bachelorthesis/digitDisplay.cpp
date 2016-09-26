@@ -16,9 +16,8 @@ Mat DigitDisplay::getLines(Mat img){
     
     Mat dest,edges, test;
     std::vector<Vec4i> lines;
-    GaussianBlur( img, edges, Size(11,11), 4, 4);
-    Canny(edges,edges,100,100,3, true);
-    test =edges;
+    GaussianBlur( img, test, Size(9,9), 4, 4);
+    Canny(test,edges,50,100,3, true);
 
   /*  cvtColor(edges, dest, CV_GRAY2BGR);
     HoughLinesP(img, lines, 1, CV_PI/180, 50, 20, 5);
@@ -41,7 +40,7 @@ Mat DigitDisplay::getLines(Mat img){
     // CV_FILLED fills the connected components found
     drawContours(mask, contours, -1, Scalar(255), CV_FILLED);
     
-    
+   
 
     return mask;
 };

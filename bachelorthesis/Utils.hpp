@@ -16,6 +16,7 @@ using namespace cv;
 class Utils {
     Utils(){};
 public: static void showImages(std::vector<Mat> srcs, std::string title);
+    void getVideo();
 };
 
 #endif /* Utils_hpp */

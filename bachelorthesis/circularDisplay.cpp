@@ -14,11 +14,10 @@
 
 
 using namespace cv;
-Point p1, p2, p3, m, middle;
-Vec4i pointer;
-int r;
-int radius;
 
+Point p1, p2, p3;
+int r;
+CircularDisplay::CircularDisplay(): middle(), pointer(), radius(){};
 
 
 
@@ -39,8 +38,8 @@ void setCoordinates(int event,int x, int y, int flags, void* userdata) {
     }
 };
 
-Point getMiddle(Point point1, Point point2, Point point3){
-    Point middle;
+void CircularDisplay::setCircleMiddle(Point point1, Point point2, Point point3){
+    
     Eigen::Matrix3f A;
     Eigen::Vector3f b;
     A << 1,-point1.x,-point1.y,  1,-point2.x,-point2.y,  1,-point3.x,-point3.y;
@@ -48,26 +47,26 @@ Point getMiddle(Point point1, Point point2, Point point3){
     Eigen::Vector3f res = A.colPivHouseholderQr().solve(b);
     middle.x = res[1]/2;
     middle.y = res[2]/2;
-    return middle;
 };
 
-int getRadius(Point middle, Point lin){
+void CircularDisplay::setCircleRadius(Point middle, Point lin){
     Point diff = lin - middle;
-    return sqrt((diff.x*diff.x) + (diff.y*diff.y));
+    radius = sqrt((diff.x*diff.x) + (diff.y*diff.y));
 };
 
 
- std::vector<Mat> CircularDisplay::analyseCircular(Mat img){
+std::vector<Mat> CircularDisplay::analyse(Mat img){
     std::vector<Mat> dest;
 
-    Mat lines, c, res;
+    Mat lines, c, res, src;
     char k, a;
     Point p;
-    
-     res = img;
+    img.copyTo(src);
+     img.copyTo(res);
     while (true){
         imshow("analyseCircular", img);
         imshow("result", res);
+        imshow("original", src);
         setMouseCallback("analyseCircular", setCoordinates , NULL);
         k = waitKey(0);
         if (k == 'q'){
@@ -75,25 +74,29 @@ int getRadius(Point middle, Point lin){
         
         } else if (k == 'c'){
             c = Mat(img.rows, img.cols, CV_8UC1);
-            m = getMiddle(p1, p2, p3);
-            std::cout << "The middle is:\n" << m << std::endl;
-            r = getRadius(m, p1);
-            std::cout << "The radius is:\n" << r << std::endl;
-            circle(c, p1, 10, Scalar(42,42, 165), 2, 8, 0);
-            circle(c, p2, 10, Scalar(165,42,42), 2, 8, 0);
-            circle(c, p3, 10, Scalar(144,255, 30), 2, 8, 0);
-            circle(c, m, r, Scalar(144,255, 30), 4, 8, 0);
+            CircularDisplay::setCircleMiddle(p1, p2, p3);
+            CircularDisplay::setCircleRadius(middle, p1);
+            std::cout << "The middle is:\n" << middle << std::endl;
+            std::cout << "The radius is:\n" << radius << std::endl;
+            circle(img, p1, 10, Scalar(42,42, 165), 2, 8, 0);
+            circle(img, p2, 10, Scalar(165,42,42), 2, 8, 0);
+            circle(img, p3, 10, Scalar(144,255, 30), 2, 8, 0);
+            circle(img, middle, radius, Scalar(144,255, 30), 1, 8, 0);
+            circle(c, middle, radius, Scalar(255,255, 255), 1, 8, 0);
             imshow("c", c);
+            waitKey(0);
             a = waitKey(0);
+
             if (a == 'y'){
-                middle = m;
-                radius = r;
-                bitwise_and(img, c, res);
+                bitwise_not(src, res);
+                bitwise_and(res, c, res);
+               // GaussianBlur( res, res, Size(9,9), 6, 6);
                 Canny(res,res,50,100,3, true);
+                src.copyTo(img);
                 
             }
         } else if (k == 'l'){
-            line( img, m, p2, Scalar(144,255, 30), 2, 8, 0);
+            line( img, middle, p2, Scalar(144,255, 30), 2, 8, 0);
             a = waitKey(0);
             if (a == 'y'){
                 pointer = {p1.x,p1.y,p2.x,p2.y};
@@ -131,6 +134,4 @@ Mat CircularDisplay::getLines(Mat img, Point p){
     }
     return dest;
 };
-
-
 
