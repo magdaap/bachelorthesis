@@ -7,3 +7,5 @@
 //
 
 #include "category.hpp"
+
+// void Category::analyse(Mat img){};

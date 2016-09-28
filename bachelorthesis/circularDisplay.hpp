@@ -9,29 +9,23 @@
 #ifndef circularDisplay_hpp
 #define circularDisplay_hpp
 
-#include <stdio.h>
-#include <opencv2/opencv.hpp>
 #include "category.hpp"
+#include <opencv2/opencv.hpp>
+#include <stdio.h>
 
-using namespace cv;
 class CircularDisplay : public Category {
-    
-    
-       
-    
-public: CircularDisplay();
-    
-    std::vector<Mat> analyse(Mat img);
-    Mat getLines(Mat img);
-    void setCircleMiddle(Point point1, Point point2, Point point3);
-    void setCircleRadius(Point middle, Point lin);
-private:
-    Point middle;
-    Vec4i pointer;
+  public:
+    CircularDisplay();
+    void analyse(cv::Mat img);
+    cv::Mat getLines(cv::Mat img);
+    void setCircleMiddle(cv::Point point1, cv::Point point2, cv::Point point3);
+    void setCircleRadius(cv::Point middle, cv::Point lin);
+
+  private:
+    cv::Point middle;
+    cv::Vec4i pointer;
     int radius;
     double amount;
-    
-    
 };
 
 #endif /* circularDisplay_hpp */

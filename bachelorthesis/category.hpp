@@ -9,14 +9,12 @@
 #ifndef category_hpp
 #define category_hpp
 
-#include <stdio.h>
 #include <opencv2/opencv.hpp>
+#include <stdio.h>
 
-
-using namespace cv;
 class Category {
-//public: virtual std::vector<Mat> analyse(Mat img);
-
+  public:
+    virtual void analyse(cv::Mat img) = 0;
 };
 
 #endif /* category_hpp */

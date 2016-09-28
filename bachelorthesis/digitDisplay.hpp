@@ -9,15 +9,16 @@
 #ifndef digitDisplay_hpp
 #define digitDisplay_hpp
 
-#include <stdio.h>
+#include "category.hpp"
 #include <opencv2/opencv.hpp>
+#include <stdio.h>
 
-using namespace cv;
-class DigitDisplay {
+class DigitDisplay : public Category {
 
-    DigitDisplay(){};
-    
-public: static Mat getLines(Mat img);
+  public:
+    DigitDisplay();
+    cv::Mat getLines(cv::Mat img);
+    void analyse(cv::Mat img);
 };
 
 #endif /* digitDisplay_hpp */

@@ -8,19 +8,15 @@
 
 #include "Utils.hpp"
 
+void Utils::showImages(std::vector<Mat> imgs, std::string title) {
 
-void Utils::showImages(std::vector<Mat> imgs, std::string title){
-    
-    for( size_t i = 0; i < imgs.size(); i++ ){
+    for (size_t i = 0; i < imgs.size(); i++) {
         //     std::cout << i << std::endl;
-        imshow(std::to_string(i)+ title, imgs[i]);
-        
-        
+        imshow(std::to_string(i) + title, imgs[i]);
     }
-    
 };
 
-void Utils::getVideo(){
+void Utils::getVideo() {
     /*   Mat test;
      VideoCapture camera(0);
      char k;
@@ -33,12 +29,13 @@ void Utils::getVideo(){
      {
      std::string text("Circle");
      IplImage testm(test);
-     cvPutText(&testm, text.c_str(), cvPoint(100, 100), &font, cvScalar(255,255,255));
-     
+     cvPutText(&testm, text.c_str(), cvPoint(100, 100), &font,
+     cvScalar(255,255,255));
+
      }
      imshow("test", test);
      k = waitKey(10);
-     
+
      if (k == 'q')
      {
      break;
@@ -47,9 +44,7 @@ void Utils::getVideo(){
      {
      t = !t;
      }
-     
-     
-     };*/
-    
-}
 
+
+     };*/
+}
