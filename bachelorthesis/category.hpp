@@ -15,7 +15,7 @@
 
 using namespace cv;
 class Category {
-public: virtual std::vector<Mat> analyse(Mat img);
+//public: virtual std::vector<Mat> analyse(Mat img);
 
 };
 

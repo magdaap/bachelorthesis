@@ -96,11 +96,14 @@ std::vector<Mat> CircularDisplay::analyse(Mat img){
                 
             }
         } else if (k == 'l'){
-            line( img, middle, p2, Scalar(144,255, 30), 2, 8, 0);
+            c = getLines(src);
+            imshow("c", getLines(src));
+
+         /*   line( img, middle, p2, Scalar(144,255, 30), 2, 8, 0);
             a = waitKey(0);
             if (a == 'y'){
                 pointer = {p1.x,p1.y,p2.x,p2.y};
-            }
+            }*/
         }
     };
     dest.push_back(img);
@@ -109,29 +112,24 @@ std::vector<Mat> CircularDisplay::analyse(Mat img){
 };
 
 
-Mat CircularDisplay::getLines(Mat img, Point p){
+Mat CircularDisplay::getLines(Mat img){
     Mat dest,edges;
     std::vector<Vec4i> lines;
     
-    Canny(img,edges,50,100,3, true);
-    
+    Canny(img,edges,50,200,3, true);
     cvtColor(edges, dest, CV_GRAY2BGR);
-    HoughLinesP(edges, lines, 1, CV_PI/180, 100, 10, 5);
-    
+    HoughLinesP(edges, lines, 3, CV_PI/90, 20, 70, 5);
     
     for( size_t i = 0; i < lines.size(); i++ )
     {
-        std::cout << lines[i] << "koordinaten" << std::endl;
         Vec4i l = lines[i];
         
-        if ((((l[0] - p.x) < 20) && ((l[0] - p.x) > -20)) && (((l[1] - p1.y) < 20) && ((l[1] - p.y) > -20))){
-            std::cout << Point(l[0], l[1]) << std::endl;
-            line( dest, p, Point(l[2], l[3]), Scalar(0,0,255), 2, 8, 0);
-        } else if ((((l[2] - p.x) < 20) && ((l[2] - p.x) > -20)) && (((l[3] - p1.y) < 20) && ((l[3] - p.y) > -20))){
-            std::cout << Point(l[0], l[1]) << std::endl;
-            line( dest, Point(l[0], l[1]),p, Scalar(0,0,255), 2, 8, 0);
-        }
+        std::cout << lines[i] << "pointer koordinaten" << std::endl;
+
+        line( dest, Point(l[0], l[1]), Point(l[2], l[3]), Scalar(0,0,255), 3, 8, 0);
+
     }
     return dest;
+
 };
 

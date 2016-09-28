@@ -22,7 +22,7 @@ class CircularDisplay : public Category {
 public: CircularDisplay();
     
     std::vector<Mat> analyse(Mat img);
-    Mat getLines(Mat img, Point p);
+    Mat getLines(Mat img);
     void setCircleMiddle(Point point1, Point point2, Point point3);
     void setCircleRadius(Point middle, Point lin);
 private:
