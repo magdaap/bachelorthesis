@@ -47,11 +47,15 @@ void CircularDisplay::setCircleMiddle(Point point1, Point point2,
     Eigen::Vector3f res = A.colPivHouseholderQr().solve(b);
     middle.x = res[1] / 2;
     middle.y = res[2] / 2;
+    std::cout << "The middle is:\n" << middle << std::endl;
+
 };
 
 void CircularDisplay::setCircleRadius(Point middle, Point lin) {
     Point diff = lin - middle;
     radius = sqrt((diff.x * diff.x) + (diff.y * diff.y));
+    std::cout << "The radius is:\n" << radius << std::endl;
+
 };
 
 void CircularDisplay::analyse(Mat img) {
@@ -76,23 +80,18 @@ void CircularDisplay::analyse(Mat img) {
             setCircleMiddle(p1, p2, p3);
             setCircleRadius(middle, p1);
             l = getLines(src);
-
-            std::cout << "The middle is:\n" << middle << std::endl;
-            std::cout << "The radius is:\n" << radius << std::endl;
-            circle(img, p1, 10, Scalar(42, 42, 165), 2, 8, 0);
-            circle(img, p2, 10, Scalar(165, 42, 42), 2, 8, 0);
-            circle(img, p3, 10, Scalar(144, 255, 30), 2, 8, 0);
-            circle(img, middle, radius, Scalar(144, 255, 30), 1, 8, 0);
             circle(c, middle, radius, Scalar(255, 255, 255), 1, 8, 0);
             bitwise_or(c, l, c);
             bitwise_not(res, res);
             imshow("line", l);
+           // bitwise_and(res, c, res);
+
             imshow("result", res);
             imshow("c", c);
-            bitwise_and(res, c, c);
-            // GaussianBlur( res, res, Size(9,9), 6, 6);
-            //  Canny(res,res,50,100,3, true);
+
+
             waitKey(0);
+            // GaussianBlur( res, res, Size(9,9), 6, 6);
 
             //  src.copyTo(img);
 
@@ -140,19 +139,4 @@ Mat CircularDisplay::getLines(Mat img) {
     Canny(test, test, 50, 100, 3, true);
 
     return test;
-};
-
-Mat getPointer(std::vector<Vec4i> lines, Mat img) {
-    Mat pointer;
-    std::vector<Vec4i> linesToMid;
-
-    for (size_t i = 0; i < lines.size(); i++) {
-        Vec4i l = lines[i];
-        std::cout << lines[i] << "pointer koordinaten" << std::endl;
-
-        line(pointer, Point(l[0], l[1]), Point(l[2], l[3]),
-             Scalar(255, 255, 255), 1, 8, 0);
-    }
-
-    return pointer;
 };

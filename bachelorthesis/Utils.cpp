@@ -47,4 +47,13 @@ void Utils::getVideo() {
 
 
      };*/
+    
+    // Utils::showImages(analizedCircular, "image1");
+    
+    // Setup a rectangle to define your region of interest
+    //    cv::Rect myROI(20, 20, image2.cols-40, image2.rows-40);
+    
+    // Crop the full image to that image contained by the rectangle myROI
+    // Note that this doesn't copy the data
+    //     cv::Mat croppedImage = image2(myROI);
 }
