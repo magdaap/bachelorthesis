@@ -8,7 +8,7 @@
 
 #include "Utils.hpp"
 
-void Utils::showImages(std::vector<Mat> imgs, std::string title) {
+void Utils::showImages(std::vector<cv::Mat> imgs, std::string title) {
 
     for (size_t i = 0; i < imgs.size(); i++) {
         //     std::cout << i << std::endl;

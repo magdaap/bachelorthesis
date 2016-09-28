@@ -12,7 +12,7 @@
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
 
-hclass Utils {
+class Utils {
     Utils(){};
 
   public:
