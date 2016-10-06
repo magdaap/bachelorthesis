@@ -7,5 +7,8 @@
 //
 
 #include "category.hpp"
+#include <opencv2/opencv.hpp>
 
-// void Category::analyse(Mat img){};
+void Category::analyse(cv::Mat img){
+ 
+ };

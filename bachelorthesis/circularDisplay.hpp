@@ -21,9 +21,10 @@ class CircularDisplay : public Category {
     cv::Mat getLineAndScale(cv::Mat img);
     void setCircleMiddle(cv::Point p1, cv::Point p2, cv::Point p3);
     void setCircleRadius(cv::Point middle, cv::Point lin);
-
+    void calculate(cv::Mat img);
+    double getLinearAmount(double offset, double maxAmount, double amount);
   private:
-    cv::Point middle;
+    cv::Point middle, pointer;
     int radius;
     double amount;
 };
