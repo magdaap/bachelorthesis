@@ -9,14 +9,15 @@
 #ifndef Utils_hpp
 #define Utils_hpp
 
-#include <stdio.h>
 #include <opencv2/opencv.hpp>
+#include <stdio.h>
 
-using namespace cv;
 class Utils {
-    
     Utils(){};
-    public: static void showImages(Mat src, Mat evo);
+
+  public:
+    static void showImages(std::vector<cv::Mat> srcs, std::string title);
+    void getVideo();
 };
 
 #endif /* Utils_hpp */
