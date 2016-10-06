@@ -14,7 +14,6 @@
 
 using namespace cv;
 
-
 int main(int argc, const char *argv[]) {
     try {
 
@@ -29,7 +28,6 @@ int main(int argc, const char *argv[]) {
         DigitDisplay dd;
         dd.analyse(image2);
 
-     
         if (!image1.data) {
             std::cout << "No image data1 \n" << std::endl;
         }
@@ -39,8 +37,7 @@ int main(int argc, const char *argv[]) {
 
         CircularDisplay cd;
         cd.analyse(image1);
-       
-        
+
         return 0;
 
     } catch (Exception &e) {

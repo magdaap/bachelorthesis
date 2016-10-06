@@ -71,20 +71,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/circularDisplay.cpp"
-            timestampString = "496762072.247708"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "bachelorthesis/digitDisplay.cpp"
             timestampString = "496762072.247708"
             startingColumnNumber = "9223372036854775807"
@@ -92,22 +78,6 @@
             startingLineNumber = "84"
             endingLineNumber = "84"
             landmarkName = "DigitDisplay::getLines(Mat img)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/circularDisplay.cpp"
-            timestampString = "496762072.247708"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "CircularDisplay::analyse(Mat img)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

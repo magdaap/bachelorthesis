@@ -18,12 +18,12 @@ class CircularDisplay : public Category {
     CircularDisplay();
     void analyse(cv::Mat img);
     cv::Mat getLines(cv::Mat img);
-    void setCircleMiddle(cv::Point point1, cv::Point point2, cv::Point point3);
+    cv::Mat getLineAndScale(cv::Mat img);
+    void setCircleMiddle(cv::Point p1, cv::Point p2, cv::Point p3);
     void setCircleRadius(cv::Point middle, cv::Point lin);
 
   private:
     cv::Point middle;
-    cv::Vec4i pointer;
     int radius;
     double amount;
 };
