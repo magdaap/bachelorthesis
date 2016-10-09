@@ -17,6 +17,8 @@ using namespace cv;
 Point p1, p2, p3;
 int r;
 CircularDisplay::CircularDisplay() : middle(),pointer(), radius(), amount(){};
+const char* analyseCirc = "analyse Circular";
+
 
 void setCoordinates(int event, int x, int y, int flags, void *userdata) {
     
@@ -59,10 +61,11 @@ void CircularDisplay::analyse(Mat img) {
     img.copyTo(src);
     img.copyTo(res);
     while (true) {
-        imshow("analyseCircular", img);
-        setMouseCallback("analyseCircular", setCoordinates, NULL);
+        imshow(analyseCirc, img);
+        setMouseCallback(analyseCirc, setCoordinates, NULL);
         k = waitKey(0);
         if (k == 'q') {
+            destroyWindow(analyseCirc);
             break;
 
         } else if (k == 'c') {

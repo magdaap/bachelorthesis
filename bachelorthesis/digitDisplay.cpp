@@ -25,6 +25,7 @@ void thresh_callback(int, void *) {
 
     /// Detect edges using Threshold
     threshold(src_gray, threshold_output, thresh, 255, THRESH_BINARY);
+    imshow("Threshhold Output", threshold_output);
     /// Find contours
     findContours(threshold_output, contours, hierarchy, CV_RETR_TREE,
                  CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
@@ -49,7 +50,6 @@ void thresh_callback(int, void *) {
     }
 
     /// Show in a window
-    namedWindow("Contours", CV_WINDOW_AUTOSIZE);
     imshow("Contours", drawing);
 }
 
@@ -61,7 +61,9 @@ void DigitDisplay::analyse(Mat img) {
 
     /// Create Window
 
-    namedWindow("Source", CV_WINDOW_AUTOSIZE);
+    imshow("Source", img);
+    Mat elements = getElements(img);
+    imshow("getElements", elements);
 
     createTrackbar(" Threshold:", "Source", &thresh, max_thresh,
                    thresh_callback);
@@ -70,12 +72,13 @@ void DigitDisplay::analyse(Mat img) {
     waitKey(0);
 }
 
-Mat DigitDisplay::getLines(Mat img) {
+Mat DigitDisplay::getElements(Mat img) {
 
     Mat dest, edges, test;
     std::vector<Vec4i> lines;
     GaussianBlur(img, test, Size(9, 9), 4, 4);
     Canny(test, edges, 50, 100, 3, true);
+    threshold(edges, edges, 100, 255, THRESH_BINARY);
 
     /*  cvtColor(edges, dest, CV_GRAY2BGR);
      HoughLinesP(img, lines, 1, CV_PI/180, 50, 20, 5);

@@ -72,12 +72,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bachelorthesis/digitDisplay.cpp"
-            timestampString = "496762072.247708"
+            timestampString = "497609793.730944"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "DigitDisplay::getLines(Mat img)"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "DigitDisplay::getElements(Mat img)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -88,12 +88,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bachelorthesis/digitDisplay.cpp"
-            timestampString = "496762072.247708"
+            timestampString = "497609660.371682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "DigitDisplay::getLines(Mat img)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "DigitDisplay::getElements(Mat img)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

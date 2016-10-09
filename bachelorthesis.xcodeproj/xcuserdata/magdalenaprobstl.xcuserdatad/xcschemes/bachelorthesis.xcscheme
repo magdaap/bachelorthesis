@@ -70,6 +70,10 @@
             argument = "/Users/magdalenaprobstl/Desktop/segmentanzeige.jpg"
             isEnabled = "YES">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/magdalenaprobstl/Desktop/test_video1_kurz.mp4"
+            isEnabled = "NO">
+         </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>

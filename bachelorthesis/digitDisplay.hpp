@@ -17,7 +17,7 @@ class DigitDisplay : public Category {
 
   public:
     DigitDisplay();
-    cv::Mat getLines(cv::Mat img);
+    cv::Mat getElements(cv::Mat img);
     void analyse(cv::Mat img);
 };
 
