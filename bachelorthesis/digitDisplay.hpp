@@ -17,8 +17,12 @@ class DigitDisplay : public Category {
 
   public:
     DigitDisplay();
+    DigitDisplay(cv::Rect roi);
     cv::Mat getElements(cv::Mat img);
     void analyse(cv::Mat img);
+
+  private:
+    cv::Rect roi;
 };
 
 #endif /* digitDisplay_hpp */

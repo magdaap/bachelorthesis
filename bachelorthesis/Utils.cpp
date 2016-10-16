@@ -10,6 +10,7 @@
 #include "Config.hpp"
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <fstream>
 
 namespace pt = boost::property_tree;
 
@@ -30,7 +31,6 @@ std::shared_ptr<Config::Config> Utils::readConfig(const char *url) {
 
     // Read the json file into root, throws on invalid syntax
     pt::json_parser::read_json(url, root);
-
     auto config = std::make_shared<Config>(
         root.get<bool>("some_bool"), root.get<std::string>("some_string"),
         root.get<int>("some_int"), root.get<bool>("manual"));
@@ -44,10 +44,10 @@ std::shared_ptr<Config::Config> Utils::readConfig(const char *url) {
         auto range = scale.get_child("range");
         auto min = range.get<int>("min");
         auto max = range.get<int>("max");
-        auto roiLeftX = range.get<int>("roiLeftX");
-        auto roiLeftY = range.get<int>("roiLeftY");
-        auto roiRightX = range.get<int>("roiRightX");
-        auto roiRightY = range.get<int>("roiRightY");
+        auto roiLeftX = scale.get<int>("roiLeftX");
+        auto roiLeftY = scale.get<int>("roiLeftY");
+        auto roiRightX = scale.get<int>("roiRightX");
+        auto roiRightY = scale.get<int>("roiRightY");
         if (type == "analog") {
             // Here we have analog
             config->addScale(Config::CircularScale(

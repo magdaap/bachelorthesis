@@ -63,20 +63,33 @@ int main(int argc, const char *argv[]) {
         }
         cv::Mat image1, image2, src, roi;
         std::vector<CircularDisplay> cds;
-        DigitDisplay dd;
+        std::vector<DigitDisplay> dds;
 
         char k;
         const char *url = argv[3];
-        auto config = Utils::readConfig(url);
+        std::shared_ptr<Config> config;
+        try {
+            config = Utils::readConfig(url);
+        } catch (std::exception &e) {
+            std::cerr << e.what() << std::endl;
+        }
         for (auto &scaleVariant : config->getScales()) {
             if (scaleVariant.type() == typeid(Config::CircularScale)) {
                 auto scale = boost::get<Config::CircularScale>(scaleVariant);
                 CircularDisplay cd = CircularDisplay(
                     scale.radius, cv::Point(scale.middleX, scale.middleY),
-                    scale.min, scale.max, Rect(Point(scale.roiLeftX, scale.roiLeftY),Point(scale.roiRightX, scale.roiRightY)));
+                    scale.min, scale.max,
+                    Rect(Point(scale.roiLeftX, scale.roiLeftY),
+                         Point(scale.roiRightX, scale.roiRightY)));
                 cds.push_back(cd);
 
             } else if (scaleVariant.type() == typeid(Config::DigitScale)) {
+                auto scale = boost::get<Config::DigitScale>(scaleVariant);
+
+                DigitDisplay dd =
+                    DigitDisplay(Rect(Point(scale.roiLeftX, scale.roiLeftY),
+                                      Point(scale.roiRightX, scale.roiRightY)));
+                dds.push_back(dd);
                 // auto scale = boost::get<Config::DigitScale>(scaleVariant);
             }
         }
@@ -96,13 +109,15 @@ int main(int argc, const char *argv[]) {
                 imshow(main_window, src);
                 k = waitKey(0);
                 if (k == 'c') {
-                    roi = src(Rect(Point(668, 101), Point(1115, 322)));
-                    for (int i = 0; i < cds.size(); i++){
-                        cds[i].analyse(src);
+                    roi = selectAreaOfInterest(src);
+                    for (int i = 0; i < cds.size(); i++) {
+                        cds[i].analyseManual(roi);
                     }
                 } else if (k == 'd') {
                     roi = selectAreaOfInterest(src);
-                    dd.analyse(roi);
+                    for (int i = 0; i < dds.size(); i++) {
+                        dds[i].analyse(roi);
+                    }
                 }
 
                 else if (k == 'q') {
@@ -112,8 +127,14 @@ int main(int argc, const char *argv[]) {
         } else {
             while (true) {
                 vid.read(src);
-                for (int i = 0; i < cds.size(); i++){
+                for (int i = 0; i < cds.size(); i++) {
                     cds[i].analyse(src);
+                }
+                for (int i = 0; i < dds.size(); i++) {
+                    dds[i].analyse(src);
+                }
+                if (src.empty()){
+                    break;
                 }
             }
         }
@@ -131,7 +152,7 @@ int main(int argc, const char *argv[]) {
 
         return 0;
 
-    } catch (Exception &e) {
+    } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
     }
 }

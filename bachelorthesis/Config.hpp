@@ -55,7 +55,8 @@ class Config {
     using ScaleVariant = boost::variant<CircularScale, DigitScale>;
 
     // Simply the constructor for our class
-    Config(bool some_bool, const std::string &some_string, int some_int);
+    Config(bool some_bool, const std::string &some_string, int some_int,
+           bool manual);
 
     template <typename T> void addScale(const T &scale) {
         scales.emplace_back(scale);

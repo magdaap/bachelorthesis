@@ -60,7 +60,7 @@ void CircularDisplay::analyseManual(Mat img) {
     Mat lines, c, l, res, src;
     char k;
     Point p;
-    src = img(roi);
+    img.copyTo(src);
     src.copyTo(res);
     while (true) {
         imshow(analyseCirc, src);

@@ -37,5 +37,7 @@ const std::vector<Config::ScaleVariant> &Config::getScales() const {
     return scales;
 }
 
-Config::Config(bool some_bool, const std::string &some_string, int some_int)
-    : some_bool(some_bool), some_string(some_string), some_int(some_int) {}
+Config::Config(bool some_bool, const std::string &some_string, int some_int,
+               bool manual)
+    : some_bool(some_bool), some_string(some_string), some_int(some_int),
+      manual(manual) {}

@@ -11,6 +11,7 @@
 
 using namespace cv;
 DigitDisplay::DigitDisplay(){};
+DigitDisplay::DigitDisplay(Rect roi) : roi(roi){};
 
 Mat src_gray;
 int thresh = 100;
@@ -54,15 +55,17 @@ void thresh_callback(int, void *) {
 }
 
 void DigitDisplay::analyse(Mat img) {
+    Mat src;
+    src = img(roi);
 
     /// Convert image to gray and blur it
-    cvtColor(img, src_gray, CV_BGR2GRAY);
+    cvtColor(src, src_gray, CV_BGR2GRAY);
     blur(src_gray, src_gray, Size(3, 3));
 
     /// Create Window
 
-    imshow("Source", img);
-    Mat elements = getElements(img);
+    imshow("Source", src);
+    Mat elements = getElements(src_gray);
     imshow("getElements", elements);
 
     createTrackbar(" Threshold:", "Source", &thresh, max_thresh,
@@ -73,34 +76,28 @@ void DigitDisplay::analyse(Mat img) {
 }
 
 Mat DigitDisplay::getElements(Mat img) {
-
+    
     Mat dest, edges, test;
-    std::vector<Vec4i> lines;
-    GaussianBlur(img, test, Size(9, 9), 4, 4);
-    Canny(test, edges, 50, 100, 3, true);
-    threshold(edges, edges, 100, 255, THRESH_BINARY);
-
-    /*  cvtColor(edges, dest, CV_GRAY2BGR);
-     HoughLinesP(img, lines, 1, CV_PI/180, 50, 20, 5);
-
-     for( size_t i = 0; i < lines.size(); i++ )
-     {
-     Vec4i l = lines[i];
-
-     line( dest, Point(l[0], l[1]), Point(l[2], l[3]), Scalar(0,0,255), 2, 8,
-     0);
-
-     }*/
-
+        std::vector<Vec4i> lines;
+    
+    threshold(img, edges, 100, 255, THRESH_BINARY);
+    imshow("jkdfm", edges);
+    waitKey();
+    destroyWindow("jkdfm");
+    Mat element = getStructuringElement( MORPH_RECT,
+                                        Size(10,10 ),
+                                        Point( -1, -1 ) );
+    /// Apply the erosion operation
+    dilate( edges, edges, element );
+    imshow( "Erosion Demo", edges );
     // find the contours
     std::vector<std::vector<Point>> contours;
     findContours(edges, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
 
-    // you could also reuse img1 here
-    Mat mask = Mat::zeros(edges.rows, edges.cols, CV_8UC1);
-
     // CV_FILLED fills the connected components found
-    drawContours(mask, contours, -1, Scalar(255), CV_FILLED);
-
-    return mask;
+    drawContours(edges, contours, -1, Scalar(255), CV_FILLED);
+    imshow("jkdfm", edges);
+    waitKey();
+    destroyWindow("jkdfm");
+    return edges;
 };
