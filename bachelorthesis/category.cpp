@@ -10,5 +10,5 @@
 #include <opencv2/opencv.hpp>
 
 void Category::analyse(cv::Mat img){
- 
- };
+
+};

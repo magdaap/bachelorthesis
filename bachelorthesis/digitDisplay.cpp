@@ -45,8 +45,8 @@ void thresh_callback(int, void *) {
                               rng.uniform(0, 255));
         drawContours(drawing, contours_poly, i, color, 1, 8,
                      std::vector<Vec4i>(), 0, Point());
-        rectangle(drawing, boundRect[i].tl(), boundRect[i].br(), color, 2, 8,
-                  0);
+        // rectangle(drawing, boundRect[i].tl(), boundRect[i].br(), color, 2, 8,
+        // 0);
     }
 
     /// Show in a window

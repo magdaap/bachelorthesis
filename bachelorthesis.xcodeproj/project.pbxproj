@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E00D4D3E1D98FE17002EB152 /* category.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E00D4D3C1D98FE17002EB152 /* category.cpp */; };
+		E016C5221DB2D766005F2E8A /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E016C5201DB2D766005F2E8A /* Config.cpp */; };
 		E0186C721D7413F60078AE01 /* digitDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0186C701D7413F60078AE01 /* digitDisplay.cpp */; };
 		E027A60C1D6F1C5C001660A3 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E027A60A1D6F1C5C001660A3 /* Utils.cpp */; };
 		E08ADD0A1D5460C4004D9E9F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E08ADD091D5460C4004D9E9F /* main.cpp */; };
@@ -29,6 +30,8 @@
 /* Begin PBXFileReference section */
 		E00D4D3C1D98FE17002EB152 /* category.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = category.cpp; sourceTree = "<group>"; };
 		E00D4D3D1D98FE17002EB152 /* category.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = category.hpp; sourceTree = "<group>"; };
+		E016C5201DB2D766005F2E8A /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Config.cpp; sourceTree = "<group>"; };
+		E016C5211DB2D766005F2E8A /* Config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Config.hpp; sourceTree = "<group>"; };
 		E0186C701D7413F60078AE01 /* digitDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = digitDisplay.cpp; sourceTree = "<group>"; };
 		E0186C711D7413F60078AE01 /* digitDisplay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = digitDisplay.hpp; sourceTree = "<group>"; };
 		E027A6081D6EE2DD001660A3 /* analogesMessgeraet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = analogesMessgeraet.jpg; sourceTree = "<group>"; };
@@ -57,6 +60,8 @@
 				E027A60A1D6F1C5C001660A3 /* Utils.cpp */,
 				E027A60B1D6F1C5C001660A3 /* Utils.hpp */,
 				E08ADD091D5460C4004D9E9F /* main.cpp */,
+				E016C5201DB2D766005F2E8A /* Config.cpp */,
+				E016C5211DB2D766005F2E8A /* Config.hpp */,
 				E027A6091D6EE2E6001660A3 /* resources */,
 				E027A6051D5DDE5C001660A3 /* categories */,
 			);
@@ -167,6 +172,7 @@
 				E00D4D3E1D98FE17002EB152 /* category.cpp in Sources */,
 				E0186C721D7413F60078AE01 /* digitDisplay.cpp in Sources */,
 				E08ADD0A1D5460C4004D9E9F /* main.cpp in Sources */,
+				E016C5221DB2D766005F2E8A /* Config.cpp in Sources */,
 				E027A60C1D6F1C5C001660A3 /* Utils.cpp in Sources */,
 				E08ADD121D54B190004D9E9F /* circularDisplay.cpp in Sources */,
 			);
@@ -314,6 +320,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/eigen/3.2.9/include/eigen3,
+					/usr/local/Cellar/boost/1.62.0/include/boost,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -322,6 +333,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/eigen/3.2.9/include/eigen3,
+					/usr/local/Cellar/boost/1.62.0/include/boost,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

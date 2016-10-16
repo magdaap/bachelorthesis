@@ -71,7 +71,11 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/Users/magdalenaprobstl/Desktop/test_video1_kurz.mp4"
+            argument = "&quot;/Users/magdalenaprobstl/Desktop/test.json&quot;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = ""
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
