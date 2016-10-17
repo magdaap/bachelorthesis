@@ -41,6 +41,7 @@
 		E08ADD091D5460C4004D9E9F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E08ADD101D54B190004D9E9F /* circularDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = circularDisplay.cpp; sourceTree = "<group>"; };
 		E08ADD111D54B190004D9E9F /* circularDisplay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = circularDisplay.hpp; sourceTree = "<group>"; };
+		E0FB83E41DB3CFB000EB9380 /* TesseractOCR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TesseractOCR.framework; path = "../../../../Downloads/OCR Tutorial Resources/Tesseract Resources/TesseractOCR.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +95,7 @@
 			children = (
 				E08ADD081D5460C4004D9E9F /* bachelorthesis */,
 				E08ADD071D5460C4004D9E9F /* Products */,
+				E0FB83E31DB3CFB000EB9380 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,6 +113,14 @@
 				E027A6031D5DDE40001660A3 /* src */,
 			);
 			path = bachelorthesis;
+			sourceTree = "<group>";
+		};
+		E0FB83E31DB3CFB000EB9380 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E0FB83E41DB3CFB000EB9380 /* TesseractOCR.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +334,27 @@
 					/usr/local/include,
 					/usr/local/Cellar/eigen/3.2.9/include/eigen3,
 					/usr/local/Cellar/boost/1.62.0/include/boost,
+					/usr/local/Cellar/tesseract/3.04.01_2/include/tesseract,
+				);
+				OTHER_LDFLAGS = (
+					"-lopencv_calib3d",
+					"-lopencv_core",
+					"-lopencv_features2d",
+					"-lopencv_flann",
+					"-lopencv_highgui",
+					"-lopencv_imgcodecs",
+					"-lopencv_imgproc",
+					"-lopencv_ml",
+					"-lopencv_objdetect",
+					"-lopencv_photo",
+					"-lopencv_shape",
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_ts",
+					"-lopencv_video",
+					"-lopencv_videoio",
+					"-lopencv_videostab",
+					"-ltesseract",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -337,6 +368,27 @@
 					/usr/local/include,
 					/usr/local/Cellar/eigen/3.2.9/include/eigen3,
 					/usr/local/Cellar/boost/1.62.0/include/boost,
+					/usr/local/Cellar/tesseract/3.04.01_2/include/tesseract,
+				);
+				OTHER_LDFLAGS = (
+					"-lopencv_calib3d",
+					"-lopencv_core",
+					"-lopencv_features2d",
+					"-lopencv_flann",
+					"-lopencv_highgui",
+					"-lopencv_imgcodecs",
+					"-lopencv_imgproc",
+					"-lopencv_ml",
+					"-lopencv_objdetect",
+					"-lopencv_photo",
+					"-lopencv_shape",
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_ts",
+					"-lopencv_video",
+					"-lopencv_videoio",
+					"-lopencv_videostab",
+					"-ltesseract",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

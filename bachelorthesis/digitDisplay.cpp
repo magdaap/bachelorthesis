@@ -8,6 +8,7 @@
 
 #include "digitDisplay.hpp"
 #include <opencv2/opencv.hpp>
+#include <tesseract/baseapi.h>
 
 using namespace cv;
 DigitDisplay::DigitDisplay(){};
@@ -84,14 +85,22 @@ Mat DigitDisplay::getElements(Mat img) {
     imshow("jkdfm", edges);
     waitKey();
     destroyWindow("jkdfm");
+    
     Mat element = getStructuringElement( MORPH_RECT,
-                                        Size(10,10 ),
+                                        Size(5,5 ),
                                         Point( -1, -1 ) );
     /// Apply the erosion operation
-    dilate( edges, edges, element );
+    erode( edges, edges, element );
     imshow( "Erosion Demo", edges );
     // find the contours
-    std::vector<std::vector<Point>> contours;
+
+    tesseract::TessBaseAPI tess;
+    tess.Init(0, 0);
+    tess.SetImage((uchar*)edges.data, edges.size().width, edges.size().height, edges.channels(), (int)edges.step1());
+    tess.Recognize(0);
+    const char* out = tess.GetUTF8Text();
+    std::cout << out << std::endl;
+     std::vector<std::vector<Point>> contours;
     findContours(edges, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
 
     // CV_FILLED fills the connected components found
