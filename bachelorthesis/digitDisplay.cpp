@@ -19,44 +19,9 @@ int thresh = 100;
 int max_thresh = 255;
 RNG rng(12345);
 
-/** @function thresh_callback */
-void thresh_callback(int, void *) {
-    Mat threshold_output;
-    std::vector<std::vector<Point>> contours;
-    std::vector<Vec4i> hierarchy;
-
-    /// Detect edges using Threshold
-    threshold(src_gray, threshold_output, thresh, 255, THRESH_BINARY);
-    imshow("Threshhold Output", threshold_output);
-    /// Find contours
-    findContours(threshold_output, contours, hierarchy, CV_RETR_TREE,
-                 CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
-
-    /// Approximate contours to polygons + get bounding rects and circles
-    std::vector<std::vector<Point>> contours_poly(contours.size());
-    std::vector<Rect> boundRect(contours.size());
-    for (int i = 0; i < contours.size(); i++) {
-        approxPolyDP(Mat(contours[i]), contours_poly[i], 3, true);
-        boundRect[i] = boundingRect(Mat(contours_poly[i]));
-    }
-
-    /// Draw polygonal contour + bonding rects + circles
-    Mat drawing = Mat::zeros(threshold_output.size(), CV_8UC3);
-    for (int i = 0; i < contours.size(); i++) {
-        Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255),
-                              rng.uniform(0, 255));
-        drawContours(drawing, contours_poly, i, color, 1, 8,
-                     std::vector<Vec4i>(), 0, Point());
-        // rectangle(drawing, boundRect[i].tl(), boundRect[i].br(), color, 2, 8,
-        // 0);
-    }
-
-    /// Show in a window
-    imshow("Contours", drawing);
-}
-
 void DigitDisplay::analyse(Mat img) {
     Mat src;
+    img = img + Scalar(-10, -10, -10);
     src = img(roi);
 
     /// Convert image to gray and blur it
@@ -65,48 +30,46 @@ void DigitDisplay::analyse(Mat img) {
 
     /// Create Window
 
-    imshow("Source", src);
+    // imshow("Source", src);
     Mat elements = getElements(src_gray);
-    imshow("getElements", elements);
+    // imshow("getElements", elements);
 
-    createTrackbar(" Threshold:", "Source", &thresh, max_thresh,
-                   thresh_callback);
-    thresh_callback(0, 0);
-
-    waitKey(0);
+    //    waitKey(0);
 }
 
 Mat DigitDisplay::getElements(Mat img) {
-    
+
     Mat dest, edges, test;
-        std::vector<Vec4i> lines;
-    
+    std::vector<Vec4i> lines;
+
+    // GaussianBlur(img, img, Size(13, 13), 0, 0);
+
     threshold(img, edges, 100, 255, THRESH_BINARY);
-    imshow("jkdfm", edges);
-    waitKey();
-    destroyWindow("jkdfm");
-    
-    Mat element = getStructuringElement( MORPH_RECT,
-                                        Size(5,5 ),
-                                        Point( -1, -1 ) );
+    bitwise_not(edges, edges);
+
+    Mat element = getStructuringElement(MORPH_RECT, Size(2, 5), Point(-1, -1));
+    Mat element1 =
+        getStructuringElement(MORPH_ELLIPSE, Size(2, 2), Point(-1, -1));
+
     /// Apply the erosion operation
-    erode( edges, edges, element );
-    imshow( "Erosion Demo", edges );
+    dilate(edges, edges, element);
+    erode(edges, edges, element1);
+    imshow("Erosion Demo", edges);
     // find the contours
 
     tesseract::TessBaseAPI tess;
-    tess.Init(0, 0);
-    tess.SetImage((uchar*)edges.data, edges.size().width, edges.size().height, edges.channels(), (int)edges.step1());
+    tess.Init("/usr/local/Cellar/tesseract/3.04.01_2/share/tessdata",
+              "letsgodigital");
+    tess.SetImage((uchar *)edges.data, edges.size().width, edges.size().height,
+                  edges.channels(), (int)edges.step1());
     tess.Recognize(0);
-    const char* out = tess.GetUTF8Text();
+    const char *out = tess.GetUTF8Text();
     std::cout << out << std::endl;
-    std::vector<std::vector<Point>> contours;
-    findContours(edges, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+    /*   std::vector<std::vector<Point>> contours;
+       findContours(edges, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
 
-    // CV_FILLED fills the connected components found
-    drawContours(edges, contours, -1, Scalar(255), CV_FILLED);
-    imshow("jkdfm", edges);
-    waitKey();
-    destroyWindow("jkdfm");
+       // CV_FILLED fills the connected components found
+       drawContours(edges, contours, -1, Scalar(255), CV_FILLED);
+     */
     return edges;
 };

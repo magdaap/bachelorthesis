@@ -55,8 +55,7 @@ class Config {
     using ScaleVariant = boost::variant<CircularScale, DigitScale>;
 
     // Simply the constructor for our class
-    Config(bool some_bool, const std::string &some_string, int some_int,
-           bool manual);
+    Config(bool video, bool manual);
 
     template <typename T> void addScale(const T &scale) {
         scales.emplace_back(scale);
@@ -65,13 +64,9 @@ class Config {
     // Self-explanatory from here on
 
     /* --- Getter start --- */
-    bool isSome_bool() const;
+    bool is_video() const;
 
     bool is_manual() const;
-
-    const std::string &getSome_string() const;
-
-    int getSome_int() const;
 
     const std::vector<ScaleVariant> &getScales() const;
 
@@ -79,10 +74,8 @@ class Config {
 
   private:
     /* --- Member start --- */
-    bool some_bool;
     bool manual;
-    std::string some_string;
-    int some_int;
+    bool video;
     std::vector<ScaleVariant> scales;
     /* --- Member end --- */
 };

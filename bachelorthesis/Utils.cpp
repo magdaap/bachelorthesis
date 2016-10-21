@@ -11,8 +11,11 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <fstream>
+#include <opencv2/opencv.hpp>
 
 namespace pt = boost::property_tree;
+
+const char *src_window = "Select ROI";
 
 void Utils::showImages(std::vector<cv::Mat> imgs, std::string title) {
 
@@ -32,8 +35,7 @@ std::shared_ptr<Config::Config> Utils::readConfig(const char *url) {
     // Read the json file into root, throws on invalid syntax
     pt::json_parser::read_json(url, root);
     auto config = std::make_shared<Config>(
-        root.get<bool>("some_bool"), root.get<std::string>("some_string"),
-        root.get<int>("some_int"), root.get<bool>("manual"));
+            root.get<bool>("video"), root.get<bool>("manual"));
 
     // Loop over all scales-Children (since it's an array)
     for (auto &n : root.get_child("scales")) {
@@ -68,36 +70,39 @@ std::shared_ptr<Config::Config> Utils::readConfig(const char *url) {
 
     return config;
 };
+cv::Point point;
+void setPoint(int event, int x, int y, int flags, void *userdata) {
 
-void Utils::getVideo() {
-    /*   Mat test;
-     VideoCapture camera(0);
-     char k;
-     bool t = false;
-     CvFont font;
-     cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, 0.4, 0.4,0,1,8);
-     while(true){
-     camera.read(test);
-     if (t)
-     {
-     std::string text("Circle");
-     IplImage testm(test);
-     cvPutText(&testm, text.c_str(), cvPoint(100, 100), &font,
-     cvScalar(255,255,255));
+    if (event == (cv::EVENT_LBUTTONDOWN)) {
+        point.x = x;
+        point.y = y;
+    }
+};
 
-     }
-     imshow("test", test);
-     k = waitKey(10);
+cv::Mat Utils::selectAreaOfInterest(cv::Mat img) {
+    cv::Mat aoi;
+    cv::Point leftup, rightdown;
+    char l;
+    img.copyTo(aoi);
+    while (true) {
+        cv::imshow(src_window, img);
+        cv::setMouseCallback(src_window, setPoint, NULL);
+        l = cv::waitKey(0);
+        if (l == '1') {
+            leftup = point;
+            std::cout << "leftup: " << leftup << std::endl;
+        } else if (l == '2') {
+            rightdown = point;
+            std::cout << "rightdown: " << rightdown << std::endl;
 
-     if (k == 'q')
-     {
-     break;
-     }
-     else if (k == 'c')
-     {
-     t = !t;
-     }
+            rectangle(img, leftup, rightdown, cv::Scalar(255));
+        } else if (l == 'q') {
+            aoi = aoi(cv::Rect(leftup, rightdown));
+            cv::destroyWindow(src_window);
 
+            break;
+        }
+    }
 
-     };*/
-}
+    return aoi;
+};

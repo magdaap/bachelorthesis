@@ -19,7 +19,7 @@ class CircularDisplay : public Category {
     CircularDisplay(int radius, cv::Point middle, int min, int max,
                     cv::Rect roi);
     void analyse(cv::Mat img);
-    void analyseManual(cv::Mat img);
+    void analyseManual(cv::Mat imgs);
 
     cv::Mat getLines(cv::Mat img);
     cv::Mat getLineAndScale(cv::Mat img);

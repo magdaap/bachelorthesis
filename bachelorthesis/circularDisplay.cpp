@@ -93,6 +93,7 @@ void CircularDisplay::analyseManual(Mat img) {
     };
 };
 
+
 void CircularDisplay::analyse(Mat img) {
     Mat res, src;
     src = img(roi);
@@ -103,9 +104,8 @@ void CircularDisplay::analyse(Mat img) {
 };
 
 Mat CircularDisplay::getLineAndScale(Mat img) {
-    Mat c, l, res;
+    Mat c, l, res, newLine, a, b;
     img.copyTo(res);
-
     // two empty pictures for
     c = Mat(img.rows, img.cols, CV_8UC1);
     l = Mat(img.rows, img.cols, CV_8UC1);
@@ -118,7 +118,7 @@ Mat CircularDisplay::getLineAndScale(Mat img) {
     Mat kernel = getStructuringElement(MORPH_RECT, Size(2, 2), Point(-1, -1));
     erode(c, c, kernel);
     dilate(c, c, kernel);
-    cvtColor(res, res, CV_RGB2GRAY);
+    //  cvtColor(res, res, CV_RGB2GRAY);
     bitwise_and(res, c, res);
     Canny(res, res, 50, 100, 3, true);
     //  imshow("res", res);
@@ -151,16 +151,22 @@ void CircularDisplay::setCircleRadius(Point middle, Point lin) {
 Mat CircularDisplay::getLines(Mat img) {
     Mat dest, edges, result, middlelines, asdf;
     std::vector<Vec4i> lines, second_lines;
+    Mat element = getStructuringElement(MORPH_RECT, Size(2, 2), Point(-1, -1));
+    erode(img, img, element);
+
+    blur(img, img, Size(3, 3));
 
     Canny(img, edges, 50, 200, 3, true);
-    cvtColor(edges, dest, CV_GRAY2BGR);
-    HoughLinesP(edges, lines, 1, CV_PI / 180, 20, 50, 1);
+    // cvtColor(edges, dest, CV_GRAY2BGR);
+    imshow("img", edges);
+    waitKey();
+    HoughLinesP(img, lines, 1, CV_PI / 180, 20, 50, 1);
 
     result = Mat(img.rows, img.cols, CV_8UC1);
     middlelines = Mat(img.rows, img.cols, CV_8UC1);
     for (size_t i = 0; i < lines.size(); i++) {
         Vec4i l = lines[i];
-
+        std::cout << l << std::endl;
         line(result, Point(l[0], l[1]), Point(l[2], l[3]),
              Scalar(255, 255, 255), 2, 8, 0);
 
@@ -169,27 +175,32 @@ Mat CircularDisplay::getLines(Mat img) {
         line(middlelines, Point(l[2], l[3]), middle, Scalar(255, 255, 255), 2,
              8, 0);
     }
-    //   imshow("middle",middlelines);
-
-    // gets the exact pointer
-    bitwise_not(result, result);
-    bitwise_and(result, middlelines, result);
-    HoughLinesP(result, second_lines, 1, CV_PI / 180, 40, 70, 1);
-    result.copyTo(asdf);
-    for (size_t i = 0; i < second_lines.size(); i++) {
-        Vec4i b = second_lines[i];
-
-        line(result, Point(b[0], b[1]), Point(b[2], b[3]),
-             Scalar(255, 255, 255), 2, 8, 0);
-    }
-
-    //    imshow("asdf",result);
-    //  waitKey(0);
-    if (second_lines.size() != 0) {
-        pointer = Point(second_lines[0][0], second_lines[0][1]);
+    if (lines.size() != 0) {
+        pointer = Point(lines[0][0], lines[0][1]);
     } else {
         pointer = Point(-1, -1);
     }
+    imshow("middle", result);
+
+    /*   // gets the exact pointer
+       bitwise_not(result, result);
+       bitwise_and(result, middlelines, result);
+       HoughLinesP(result, second_lines, 1, CV_PI / 180, 40, 70, 1);
+       result.copyTo(asdf);
+       for (size_t i = 0; i < second_lines.size(); i++) {
+           Vec4i b = second_lines[i];
+
+           line(result, Point(b[0], b[1]), Point(b[2], b[3]),
+                Scalar(255, 255, 255), 2, 8, 0);
+       }
+
+           imshow("asdf",result);
+         waitKey(0);
+       if (second_lines.size() != 0) {
+           pointer = Point(second_lines[0][0], second_lines[0][1]);
+       } else {
+           pointer = Point(-1, -1);
+       }*/
     return result;
 };
 
@@ -203,7 +214,7 @@ void CircularDisplay::calculate(const Mat img) {
     findContours(img, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
     Mat test = Mat::zeros(img.size(), CV_8UC3);
     drawContours(test, contours, -1, Scalar(255), CV_FILLED);
-    //   imshow("test", test);
+    imshow("test", test);
     std::vector<Point> leftRightMost = getLeftRightMost(contours);
     Point leftmost = leftRightMost[0];
     Point rightmost = leftRightMost[1];

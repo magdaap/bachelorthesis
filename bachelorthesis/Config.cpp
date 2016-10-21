@@ -26,18 +26,12 @@ Config::DigitScale::DigitScale(int min, int max, int roiLeftX, int roiLeftY,
     : Scale(min, max, roiLeftX, roiLeftY, roiRightX, roiRightY),
       digitCount(digitCount) {}
 
-bool Config::isSome_bool() const { return some_bool; }
 bool Config::is_manual() const { return manual; }
 
-const std::string &Config::getSome_string() const { return some_string; }
-
-int Config::getSome_int() const { return some_int; }
+bool Config::is_video() const { return video; }
 
 const std::vector<Config::ScaleVariant> &Config::getScales() const {
     return scales;
 }
 
-Config::Config(bool some_bool, const std::string &some_string, int some_int,
-               bool manual)
-    : some_bool(some_bool), some_string(some_string), some_int(some_int),
-      manual(manual) {}
+Config::Config(bool video, bool manual) : video(video), manual(manual) {}

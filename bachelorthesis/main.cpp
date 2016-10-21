@@ -14,45 +14,7 @@
 
 using namespace cv;
 
-const char *src_window = "Select ROI";
 const char *main_window = "Image Recognition";
-
-Point point;
-void setPoint(int event, int x, int y, int flags, void *userdata) {
-
-    if (event == (EVENT_LBUTTONDOWN)) {
-        point.x = x;
-        point.y = y;
-    }
-};
-
-Mat selectAreaOfInterest(Mat img) {
-    Mat aoi;
-    Point leftup, rightdown;
-    char l;
-    img.copyTo(aoi);
-    while (true) {
-        imshow(src_window, img);
-        setMouseCallback(src_window, setPoint, NULL);
-        l = waitKey(0);
-        if (l == '1') {
-            leftup = point;
-            std::cout << "leftup: " << leftup << std::endl;
-        } else if (l == '2') {
-            rightdown = point;
-            std::cout << "rightdown: " << rightdown << std::endl;
-
-            rectangle(img, leftup, rightdown, Scalar(255));
-        } else if (l == 'q') {
-            aoi = aoi(Rect(leftup, rightdown));
-            destroyWindow(src_window);
-
-            break;
-        }
-    }
-
-    return aoi;
-};
 
 int main(int argc, const char *argv[]) {
     try {
@@ -61,12 +23,19 @@ int main(int argc, const char *argv[]) {
             std::cout << "No image data given \n" << std::endl;
             return -1;
         }
-        cv::Mat image1, image2, src, roi;
+        cv::Mat src, roi, bg;
+        
+        bool doesPicExist;
+        
         std::vector<CircularDisplay> cds;
         std::vector<DigitDisplay> dds;
-
         char k;
-        const char *url = argv[3];
+        const char *url2 = argv[1];
+        std::cout << url2 << std::endl;
+
+        const char *url = argv[2];
+        std::cout << url << std::endl;
+
         std::shared_ptr<Config> config;
         try {
             config = Utils::readConfig(url);
@@ -94,62 +63,71 @@ int main(int argc, const char *argv[]) {
             }
         }
 
-        VideoCapture vid(
-            "/Users/magdalenaprobstl/Desktop/test_video1_kurz.mp4");
-        if (!vid.isOpened()) {
-            std::cout << "Cannot open video!\n";
-            return -1;
-        }
-        image1 = imread(argv[1], CV_LOAD_IMAGE_COLOR);
-        image2 = imread(argv[2], CV_LOAD_IMAGE_COLOR);
+        auto mog = createBackgroundSubtractorMOG2();
+        if (config->is_video()) {
+            VideoCapture vid(url2);
+            if (!vid.isOpened()) {
+                std::cout << "Cannot open video!\n";
+                return -1;
+            }
 
-        if (config->is_manual() == true) {
-            while (true) {
-                vid.read(src);
-                imshow(main_window, src);
-                k = waitKey(0);
-                if (k == 'c') {
-                    roi = selectAreaOfInterest(src);
-                    for (int i = 0; i < cds.size(); i++) {
-                        cds[i].analyseManual(roi);
+            if (config->is_manual()) {
+                while (true) {
+
+                    doesPicExist = vid.read(src);
+                    imshow(main_window, src);
+                    //  cvtColor(src, src, CV_GRAY2RGB);
+
+                    k = waitKey(0);
+                    if (k == 'c') {
+                        roi = Utils::selectAreaOfInterest(src);
+                        for (int i = 0; i < cds.size(); i++) {
+                            mog->apply(roi, bg);
+                            imshow("frame", bg);
+                            cds[i].analyseManual(bg);
+                        }
+                    } else if (k == 'd') {
+                        roi = Utils::selectAreaOfInterest(src);
+                        for (int i = 0; i < dds.size(); i++) {
+                            dds[i].analyse(roi);
+                        }
                     }
-                } else if (k == 'd') {
-                    roi = selectAreaOfInterest(src);
-                    for (int i = 0; i < dds.size(); i++) {
-                        dds[i].analyse(roi);
+
+                    else if (k == 'q') {
+                        break;
                     }
                 }
-
-                else if (k == 'q') {
-                    break;
+            } else {
+                while (true) {
+                    doesPicExist = vid.read(src);
+                    if (doesPicExist) {
+                        for (int i = 0; i < cds.size(); i++) {
+                            imshow("src", src);
+                            mog->apply(src, bg);
+                            cds[i].analyse(bg);
+                        }
+                        for (int i = 0; i < dds.size(); i++) {
+                            dds[i].analyse(src);
+                        }
+                        if (src.empty()) {
+                            //  break;
+                        }
+                    }
                 }
             }
         } else {
-            while (true) {
-                vid.read(src);
-                for (int i = 0; i < cds.size(); i++) {
-                    cds[i].analyse(src);
-                }
-                for (int i = 0; i < dds.size(); i++) {
-                    dds[i].analyse(src);
-                }
-                if (src.empty()){
-                    break;
-                }
+            src = imread(url2);
+            roi = Utils::selectAreaOfInterest(src);
+            k = waitKey(0);
+            if (k == 'c'){
+                CircularDisplay cd;
+                cd.analyse(roi);
+            }
+            else if (k == 'd'){
+                DigitDisplay dd;
+                dd.analyse(roi);
             }
         }
-
-        //  dd.analyse(image2);
-
-        if (!image1.data) {
-            std::cout << "No image data1 \n" << std::endl;
-        }
-        if (!image2.data) {
-            std::cout << "No image data2 \n" << std::endl;
-        }
-
-        //  cd.analyse(image1);
-
         return 0;
 
     } catch (std::exception &e) {
