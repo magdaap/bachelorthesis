@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E00D4D3E1D98FE17002EB152 /* category.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E00D4D3C1D98FE17002EB152 /* category.cpp */; };
+		E016C5221DB2D766005F2E8A /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E016C5201DB2D766005F2E8A /* Config.cpp */; };
+		E0186C721D7413F60078AE01 /* digitDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0186C701D7413F60078AE01 /* digitDisplay.cpp */; };
 		E027A60C1D6F1C5C001660A3 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E027A60A1D6F1C5C001660A3 /* Utils.cpp */; };
 		E08ADD0A1D5460C4004D9E9F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E08ADD091D5460C4004D9E9F /* main.cpp */; };
 		E08ADD121D54B190004D9E9F /* circularDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E08ADD101D54B190004D9E9F /* circularDisplay.cpp */; };
@@ -25,6 +28,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E00D4D3C1D98FE17002EB152 /* category.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = category.cpp; sourceTree = "<group>"; };
+		E00D4D3D1D98FE17002EB152 /* category.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = category.hpp; sourceTree = "<group>"; };
+		E016C5201DB2D766005F2E8A /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Config.cpp; sourceTree = "<group>"; };
+		E016C5211DB2D766005F2E8A /* Config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Config.hpp; sourceTree = "<group>"; };
+		E0186C701D7413F60078AE01 /* digitDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = digitDisplay.cpp; sourceTree = "<group>"; };
+		E0186C711D7413F60078AE01 /* digitDisplay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = digitDisplay.hpp; sourceTree = "<group>"; };
 		E027A6081D6EE2DD001660A3 /* analogesMessgeraet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = analogesMessgeraet.jpg; sourceTree = "<group>"; };
 		E027A60A1D6F1C5C001660A3 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		E027A60B1D6F1C5C001660A3 /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
@@ -32,6 +41,7 @@
 		E08ADD091D5460C4004D9E9F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E08ADD101D54B190004D9E9F /* circularDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = circularDisplay.cpp; sourceTree = "<group>"; };
 		E08ADD111D54B190004D9E9F /* circularDisplay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = circularDisplay.hpp; sourceTree = "<group>"; };
+		E0FB83E41DB3CFB000EB9380 /* TesseractOCR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TesseractOCR.framework; path = "../../../../Downloads/OCR Tutorial Resources/Tesseract Resources/TesseractOCR.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +61,8 @@
 				E027A60A1D6F1C5C001660A3 /* Utils.cpp */,
 				E027A60B1D6F1C5C001660A3 /* Utils.hpp */,
 				E08ADD091D5460C4004D9E9F /* main.cpp */,
+				E016C5201DB2D766005F2E8A /* Config.cpp */,
+				E016C5211DB2D766005F2E8A /* Config.hpp */,
 				E027A6091D6EE2E6001660A3 /* resources */,
 				E027A6051D5DDE5C001660A3 /* categories */,
 			);
@@ -62,6 +74,10 @@
 			children = (
 				E08ADD101D54B190004D9E9F /* circularDisplay.cpp */,
 				E08ADD111D54B190004D9E9F /* circularDisplay.hpp */,
+				E0186C701D7413F60078AE01 /* digitDisplay.cpp */,
+				E0186C711D7413F60078AE01 /* digitDisplay.hpp */,
+				E00D4D3C1D98FE17002EB152 /* category.cpp */,
+				E00D4D3D1D98FE17002EB152 /* category.hpp */,
 			);
 			name = categories;
 			sourceTree = "<group>";
@@ -79,6 +95,7 @@
 			children = (
 				E08ADD081D5460C4004D9E9F /* bachelorthesis */,
 				E08ADD071D5460C4004D9E9F /* Products */,
+				E0FB83E31DB3CFB000EB9380 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +113,14 @@
 				E027A6031D5DDE40001660A3 /* src */,
 			);
 			path = bachelorthesis;
+			sourceTree = "<group>";
+		};
+		E0FB83E31DB3CFB000EB9380 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E0FB83E41DB3CFB000EB9380 /* TesseractOCR.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,7 +149,7 @@
 		E08ADCFE1D5460C4004D9E9F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Magdalena Pröbstl";
 				TargetAttributes = {
 					E08ADD051D5460C4004D9E9F = {
@@ -154,7 +179,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E00D4D3E1D98FE17002EB152 /* category.cpp in Sources */,
+				E0186C721D7413F60078AE01 /* digitDisplay.cpp in Sources */,
 				E08ADD0A1D5460C4004D9E9F /* main.cpp in Sources */,
+				E016C5221DB2D766005F2E8A /* Config.cpp in Sources */,
 				E027A60C1D6F1C5C001660A3 /* Utils.cpp in Sources */,
 				E08ADD121D54B190004D9E9F /* circularDisplay.cpp in Sources */,
 			);
@@ -178,8 +206,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -201,7 +231,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = /usr/local/include;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/eigen/3.2.9/include/eigen3,
+				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -244,8 +277,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -261,7 +296,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = /usr/local/include;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/eigen/3.2.9/include/eigen3,
+				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -292,6 +330,32 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/eigen/3.2.9/include/eigen3,
+					/usr/local/Cellar/boost/1.62.0/include/boost,
+					/usr/local/Cellar/tesseract/3.04.01_2/include/tesseract,
+				);
+				OTHER_LDFLAGS = (
+					"-lopencv_calib3d",
+					"-lopencv_core",
+					"-lopencv_features2d",
+					"-lopencv_flann",
+					"-lopencv_highgui",
+					"-lopencv_imgcodecs",
+					"-lopencv_imgproc",
+					"-lopencv_ml",
+					"-lopencv_objdetect",
+					"-lopencv_photo",
+					"-lopencv_shape",
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_ts",
+					"-lopencv_video",
+					"-lopencv_videoio",
+					"-lopencv_videostab",
+					"-ltesseract",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -300,6 +364,32 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/eigen/3.2.9/include/eigen3,
+					/usr/local/Cellar/boost/1.62.0/include/boost,
+					/usr/local/Cellar/tesseract/3.04.01_2/include/tesseract,
+				);
+				OTHER_LDFLAGS = (
+					"-lopencv_calib3d",
+					"-lopencv_core",
+					"-lopencv_features2d",
+					"-lopencv_flann",
+					"-lopencv_highgui",
+					"-lopencv_imgcodecs",
+					"-lopencv_imgproc",
+					"-lopencv_ml",
+					"-lopencv_objdetect",
+					"-lopencv_photo",
+					"-lopencv_shape",
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_ts",
+					"-lopencv_video",
+					"-lopencv_videoio",
+					"-lopencv_videostab",
+					"-ltesseract",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
