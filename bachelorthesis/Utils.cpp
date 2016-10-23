@@ -34,8 +34,8 @@ std::shared_ptr<Config::Config> Utils::readConfig(const char *url) {
 
     // Read the json file into root, throws on invalid syntax
     pt::json_parser::read_json(url, root);
-    auto config = std::make_shared<Config>(
-            root.get<bool>("video"), root.get<bool>("manual"));
+    auto config = std::make_shared<Config>(root.get<bool>("video"),
+                                           root.get<bool>("manual"));
 
     // Loop over all scales-Children (since it's an array)
     for (auto &n : root.get_child("scales")) {

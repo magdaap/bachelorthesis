@@ -11,8 +11,8 @@
 #include <tesseract/baseapi.h>
 
 using namespace cv;
-DigitDisplay::DigitDisplay(){};
-DigitDisplay::DigitDisplay(Rect roi) : roi(roi){};
+DigitDisplay::DigitDisplay() : shownAmount(){};
+DigitDisplay::DigitDisplay(Rect roi) : roi(roi), shownAmount(){};
 
 Mat src_gray;
 int thresh = 100;
@@ -65,11 +65,10 @@ Mat DigitDisplay::getElements(Mat img) {
     tess.Recognize(0);
     const char *out = tess.GetUTF8Text();
     std::cout << out << std::endl;
-    /*   std::vector<std::vector<Point>> contours;
-       findContours(edges, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
 
-       // CV_FILLED fills the connected components found
-       drawContours(edges, contours, -1, Scalar(255), CV_FILLED);
-     */
+    shownAmount = atof(out);
+    std::cout << shownAmount << std::endl;
     return edges;
 };
+
+double DigitDisplay::getAmount() { return shownAmount; };

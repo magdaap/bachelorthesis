@@ -12,3 +12,5 @@
 void Category::analyse(cv::Mat img){
 
 };
+
+double Category::getAmount() { return shownAmount; };

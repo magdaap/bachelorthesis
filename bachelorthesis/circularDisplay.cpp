@@ -17,11 +17,11 @@ using namespace cv;
 Point p1, p2, p3;
 int r;
 CircularDisplay::CircularDisplay()
-    : middle(), pointer(), radius(), amount(), roi(){};
+    : middle(), pointer(), radius(), amount(), roi(), shownAmount(){};
 CircularDisplay::CircularDisplay(int radius, cv::Point middle, int min, int max,
                                  Rect roi)
     : middle(middle), pointer(), radius(radius), amount(), roi(roi), min(min),
-      max(max){};
+      max(max), shownAmount(){};
 
 const char *analyseCirc = "analyse Circular";
 
@@ -55,6 +55,14 @@ std::vector<Point> getLeftRightMost(std::vector<std::vector<Point>> cont) {
     return {leftmost, rightmost};
 };
 
+void CircularDisplay::config(Mat img) {
+    imshow(analyseCirc, img);
+    setMouseCallback(analyseCirc, setCoordinates, NULL);
+    waitKey();
+    setCircleMiddle(p1, p2, p3);
+    setCircleRadius(middle, p1);
+};
+
 void CircularDisplay::analyseManual(Mat img) {
 
     Mat lines, c, l, res, src;
@@ -63,17 +71,10 @@ void CircularDisplay::analyseManual(Mat img) {
     img.copyTo(src);
     src.copyTo(res);
     while (true) {
-        imshow(analyseCirc, src);
-        setMouseCallback(analyseCirc, setCoordinates, NULL);
         k = waitKey(0);
         if (k == 'q') {
             destroyWindow(analyseCirc);
             break;
-
-        } else if (k == 'c') {
-            setCircleMiddle(p1, p2, p3);
-            setCircleRadius(middle, p1); // imshow("result", res);
-            waitKey();
 
         } else if (k == 'a') {
             res = getLineAndScale(src);
@@ -81,18 +82,9 @@ void CircularDisplay::analyseManual(Mat img) {
             double a = getLinearAmount(0, 100, amount);
             std::cout << a << " amount" << std::endl;
             std::string text = std::to_string(a);
-            CvFont font;
-            IplImage testm(src);
-
-            cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, 0.4, 0.4, 0, 1, 8);
-            cvPutText(&testm, text.c_str(), cvPoint(src.rows / 2, src.cols / 2),
-                      &font, cvScalar(0, 0, 0));
-
-        } else if (k == 'z') {
         }
     };
 };
-
 
 void CircularDisplay::analyse(Mat img) {
     Mat res, src;
@@ -158,8 +150,8 @@ Mat CircularDisplay::getLines(Mat img) {
 
     Canny(img, edges, 50, 200, 3, true);
     // cvtColor(edges, dest, CV_GRAY2BGR);
-    imshow("img", edges);
-    waitKey();
+    //   imshow("img", edges);
+    // waitKey();
     HoughLinesP(img, lines, 1, CV_PI / 180, 20, 50, 1);
 
     result = Mat(img.rows, img.cols, CV_8UC1);
@@ -180,7 +172,7 @@ Mat CircularDisplay::getLines(Mat img) {
     } else {
         pointer = Point(-1, -1);
     }
-    imshow("middle", result);
+    //  imshow("middle", result);
 
     /*   // gets the exact pointer
        bitwise_not(result, result);
@@ -214,7 +206,7 @@ void CircularDisplay::calculate(const Mat img) {
     findContours(img, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
     Mat test = Mat::zeros(img.size(), CV_8UC3);
     drawContours(test, contours, -1, Scalar(255), CV_FILLED);
-    imshow("test", test);
+    //   imshow("test", test);
     std::vector<Point> leftRightMost = getLeftRightMost(contours);
     Point leftmost = leftRightMost[0];
     Point rightmost = leftRightMost[1];
@@ -247,5 +239,8 @@ void CircularDisplay::calculate(const Mat img) {
 // calculates Linear Amount
 double CircularDisplay::getLinearAmount(double minAmount, double maxAmount,
                                         double amount) {
-    return (amount * maxAmount) + minAmount;
-}
+    shownAmount = (amount * maxAmount) + minAmount;
+    return shownAmount;
+};
+
+double CircularDisplay::getAmount() { return shownAmount; };

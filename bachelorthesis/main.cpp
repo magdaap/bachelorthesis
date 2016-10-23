@@ -9,6 +9,7 @@
 #include "Utils.hpp"
 #include "circularDisplay.hpp"
 #include "digitDisplay.hpp"
+#include <fstream>
 #include <iostream>
 #include <opencv2/opencv.hpp>
 
@@ -24,9 +25,9 @@ int main(int argc, const char *argv[]) {
             return -1;
         }
         cv::Mat src, roi, bg;
-        
+
         bool doesPicExist;
-        
+
         std::vector<CircularDisplay> cds;
         std::vector<DigitDisplay> dds;
         char k;
@@ -70,12 +71,18 @@ int main(int argc, const char *argv[]) {
                 std::cout << "Cannot open video!\n";
                 return -1;
             }
+            std::ofstream analogResultFile;
+            std::ofstream digitalResultsFile;
+            analogResultFile.open(
+                "/Users/magdalenaprobstl/Desktop/analog_results.txt");
+            digitalResultsFile.open(
+                "/Users/magdalenaprobstl/Desktop/digital_results.txt");
 
             if (config->is_manual()) {
                 while (true) {
 
                     doesPicExist = vid.read(src);
-                    imshow(main_window, src);
+                    //  imshow(main_window, src);
                     //  cvtColor(src, src, CV_GRAY2RGB);
 
                     k = waitKey(0);
@@ -83,33 +90,42 @@ int main(int argc, const char *argv[]) {
                         roi = Utils::selectAreaOfInterest(src);
                         for (int i = 0; i < cds.size(); i++) {
                             mog->apply(roi, bg);
-                            imshow("frame", bg);
+                            //     imshow("frame", bg);
                             cds[i].analyseManual(bg);
+                            analogResultFile << cds[i].getAmount() << std::endl;
                         }
+                        analogResultFile.close();
                     } else if (k == 'd') {
                         roi = Utils::selectAreaOfInterest(src);
                         for (int i = 0; i < dds.size(); i++) {
                             dds[i].analyse(roi);
                         }
-                    }
-
-                    else if (k == 'q') {
+                    } else if (k == 'q') {
                         break;
                     }
                 }
             } else {
                 while (true) {
                     doesPicExist = vid.read(src);
+
                     if (doesPicExist) {
                         for (int i = 0; i < cds.size(); i++) {
-                            imshow("src", src);
+                            //  imshow("src", src);
                             mog->apply(src, bg);
                             cds[i].analyse(bg);
+
+                            analogResultFile << cds[i].getAmount() << std::endl;
                         }
+
                         for (int i = 0; i < dds.size(); i++) {
                             dds[i].analyse(src);
+                            digitalResultsFile << dds[i].getAmount()
+                                               << std::endl;
                         }
                         if (src.empty()) {
+                            analogResultFile.close();
+                            digitalResultsFile.close();
+
                             //  break;
                         }
                     }
@@ -119,11 +135,11 @@ int main(int argc, const char *argv[]) {
             src = imread(url2);
             roi = Utils::selectAreaOfInterest(src);
             k = waitKey(0);
-            if (k == 'c'){
+            if (k == 'c') {
                 CircularDisplay cd;
+                cd.config(roi);
                 cd.analyse(roi);
-            }
-            else if (k == 'd'){
+            } else if (k == 'd') {
                 DigitDisplay dd;
                 dd.analyse(roi);
             }

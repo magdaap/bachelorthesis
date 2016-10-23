@@ -15,6 +15,10 @@
 class Category {
   public:
     virtual void analyse(cv::Mat img) = 0;
+    virtual double getAmount() = 0;
+
+  private:
+    double shownAmount;
 };
 
 #endif /* category_hpp */
