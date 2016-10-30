@@ -97,12 +97,10 @@ cv::Mat Utils::selectAreaOfInterest(cv::Mat img) {
 
             rectangle(img, leftup, rightdown, cv::Scalar(255));
         } else if (l == 'q') {
-            aoi = aoi(cv::Rect(leftup, rightdown));
             cv::destroyWindow(src_window);
-
+            aoi = aoi( cv::Rect(leftup, rightdown));
             break;
         }
     }
-
     return aoi;
 };

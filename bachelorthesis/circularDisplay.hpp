@@ -9,15 +9,15 @@
 #ifndef circularDisplay_hpp
 #define circularDisplay_hpp
 
-#include "category.hpp"
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
 
-class CircularDisplay : public Category {
+class CircularDisplay {
   public:
     CircularDisplay();
     CircularDisplay(int radius, cv::Point middle, int min, int max,
-                    cv::Rect roi);
+                    cv::Rect roi, bool manual);
+
     void analyse(cv::Mat img);
     void analyseManual(cv::Mat imgs);
 
@@ -30,6 +30,8 @@ class CircularDisplay : public Category {
     void calculate(cv::Mat img);
     double getLinearAmount(double offset, double maxAmount, double amount);
     double getAmount();
+    bool roi_isset();
+    void set_roi(cv::Rect roi);
 
   private:
     cv::Point middle, pointer;
@@ -39,6 +41,7 @@ class CircularDisplay : public Category {
     cv::Rect roi;
     int min;
     int max;
+    bool manual;
 };
 
 #endif /* circularDisplay_hpp */

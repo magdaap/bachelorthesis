@@ -63,11 +63,11 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Users/magdalenaprobstl/Desktop/analogesMessgeraet.jpg"
+            argument = "&quot;/Users/magdalenaprobstl/Documents/Bachelorarbeit/code/bachelorthesis/bachelorthesis/resources/analogesMessgeraet.jpg&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "&quot;/Users/magdalenaprobstl/Desktop/test.json&quot;"
+            argument = "&quot;/Users/magdalenaprobstl/Documents/Bachelorarbeit/code/bachelorthesis/bachelorthesis/resources/test_bild.json&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

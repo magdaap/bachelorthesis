@@ -31,11 +31,9 @@ int main(int argc, const char *argv[]) {
         std::vector<CircularDisplay> cds;
         std::vector<DigitDisplay> dds;
         char k;
-        const char *url2 = argv[1];
-        std::cout << url2 << std::endl;
+        const char *srcUrl = argv[1];
 
         const char *url = argv[2];
-        std::cout << url << std::endl;
 
         std::shared_ptr<Config> config;
         try {
@@ -50,7 +48,7 @@ int main(int argc, const char *argv[]) {
                     scale.radius, cv::Point(scale.middleX, scale.middleY),
                     scale.min, scale.max,
                     Rect(Point(scale.roiLeftX, scale.roiLeftY),
-                         Point(scale.roiRightX, scale.roiRightY)));
+                         Point(scale.roiRightX, scale.roiRightY)), config->is_manual());
                 cds.push_back(cd);
 
             } else if (scaleVariant.type() == typeid(Config::DigitScale)) {
@@ -58,7 +56,7 @@ int main(int argc, const char *argv[]) {
 
                 DigitDisplay dd =
                     DigitDisplay(Rect(Point(scale.roiLeftX, scale.roiLeftY),
-                                      Point(scale.roiRightX, scale.roiRightY)));
+                                      Point(scale.roiRightX, scale.roiRightY)), scale.max);
                 dds.push_back(dd);
                 // auto scale = boost::get<Config::DigitScale>(scaleVariant);
             }
@@ -66,7 +64,7 @@ int main(int argc, const char *argv[]) {
 
         auto mog = createBackgroundSubtractorMOG2();
         if (config->is_video()) {
-            VideoCapture vid(url2);
+            VideoCapture vid(srcUrl);
             if (!vid.isOpened()) {
                 std::cout << "Cannot open video!\n";
                 return -1;
@@ -82,8 +80,8 @@ int main(int argc, const char *argv[]) {
                 while (true) {
 
                     doesPicExist = vid.read(src);
-                    //  imshow(main_window, src);
-                    //  cvtColor(src, src, CV_GRAY2RGB);
+                      imshow(main_window, src);
+                  cvtColor(src, src, CV_GRAY2RGB);
 
                     k = waitKey(0);
                     if (k == 'c') {
@@ -132,7 +130,7 @@ int main(int argc, const char *argv[]) {
                 }
             }
         } else {
-            src = imread(url2);
+            src = imread(srcUrl);
             roi = Utils::selectAreaOfInterest(src);
             k = waitKey(0);
             if (k == 'c') {
