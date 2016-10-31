@@ -4,29 +4,17 @@
       "type": "analog",
       "range": {
         "min": 0,
-        "max": 250
-      },
-      "middleX": 289,
-      "middleY": 374,
-      "roiLeftX": 0,
-      "roiLeftY": 0,
-      "roiRightX":572,
-      "roiRightY":248,
-      "radius": 324
-    },
-    {
-      "type": "digital",
-      "range": {
-        "min": 0,
         "max": 100
       },
-      "digitCount": 4,
-      "roiLeftX": 240,
-      "roiLeftY": 141,
-      "roiRightX": 424,
-      "roiRightY": 240
+      "middleX": 238,
+      "middleY": 354,
+      "roiLeftX": 53,
+      "roiLeftY": 15,
+      "roiRightX":530,
+      "roiRightY":234,
+      "radius": 319
     }
   ],
-  "manual": "false",
+  "manual": "true",
   "video": "false"
 }

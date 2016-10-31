@@ -17,7 +17,7 @@ namespace pt = boost::property_tree;
 
 // Shorter, boost namespaces are fucking long
 
-std::shared_ptr<Config::Config> Utils::readConfig(const char *url) {
+std::shared_ptr<Config::Config> readConfig(const char *url) {
 
     // Root of the whole json file
     pt::ptree root;

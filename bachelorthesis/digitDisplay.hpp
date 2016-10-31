@@ -17,11 +17,11 @@ class DigitDisplay : public Display {
 
   public:
     DigitDisplay();
-    DigitDisplay(int max);
+    DigitDisplay(int max, bool manual);
 
-    virtual void analyse(cv::Mat img) override;
+    virtual void analyze(cv::Mat img) override;
     virtual double getAmount() override;
-    bool roi_isset();
+    bool roiIsset();
     virtual void selectRegionOfInterest(const cv::Mat &img) override;
 
   private:
@@ -31,6 +31,7 @@ class DigitDisplay : public Display {
 
     int max;
     double shownAmount;
+    bool manual;
 };
 
 #endif /* digitDisplay_hpp */

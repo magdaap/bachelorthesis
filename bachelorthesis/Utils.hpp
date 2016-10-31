@@ -13,11 +13,6 @@
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
 
-class Utils {
-    Utils(){};
-
-  public:
-    static std::shared_ptr<Config::Config> readConfig(const char *url);
-};
+std::shared_ptr<Config::Config> readConfig(const char *url);
 
 #endif /* Utils_hpp */

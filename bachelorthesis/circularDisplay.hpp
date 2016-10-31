@@ -19,14 +19,14 @@ class CircularDisplay : public Display {
     CircularDisplay(int radius, cv::Point middle, int min, int max,
                     bool manual);
 
-    virtual void analyse(cv::Mat img) override;
+    virtual void analyze(cv::Mat img) override;
 
     void config(cv::Mat img);
 
     virtual void selectRegionOfInterest(const cv::Mat &img) override;
 
     virtual double getAmount() override;
-    bool roi_isset();
+    bool roiIsset();
 
   private:
     cv::Mat getLines(cv::Mat img);

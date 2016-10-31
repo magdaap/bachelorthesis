@@ -23,21 +23,22 @@ class Display {
      */
     virtual void selectRegionOfInterest(const cv::Mat &img) = 0;
 
-    virtual void analyse(cv::Mat img) = 0;
+    virtual void analyze(cv::Mat img) = 0;
 
     virtual double getAmount() = 0;
 
     const cv::Mat &regionOfInterest();
 
     const cv::Rect &regionOfInterestRect();
-    void set_roi(cv::Rect roi);
+    void setROI(cv::Rect roi);
 
   protected:
     void selectROI(const cv::Mat &img);
 
   private:
     cv::Rect roi;
-    cv::Mat roi_img;
+    cv::Mat roiImg;
+    bool manual;
 };
 
 #endif /* Display_hpp */

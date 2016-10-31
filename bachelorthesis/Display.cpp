@@ -35,11 +35,14 @@ void Display::selectROI(const cv::Mat &img) {
             rightdown = point;
             std::cout << "rightdown: " << rightdown << std::endl;
 
-            rectangle(img, leftup, rightdown, cv::Scalar(255));
+            rectangle(img, leftup, rightdown, cv::Scalar(0));
         } else if (l == 'q') {
             cv::destroyWindow(src_window);
             roi = cv::Rect(leftup, rightdown);
-            roi_img = roi_img(roi);
+            roiImg = roi_img(roi);
+            imshow("finish", roi_img);
+            cv::waitKey(0);
+            cv::destroyWindow("finish");
 
             break;
         }
@@ -48,6 +51,6 @@ void Display::selectROI(const cv::Mat &img) {
 
 const cv::Rect &Display::regionOfInterestRect() { return roi; }
 
-const cv::Mat &Display::regionOfInterest() { return roi_img; }
+const cv::Mat &Display::regionOfInterest() { return roiImg; }
 
-void Display::set_roi(cv::Rect new_roi) { roi = new_roi; };
+void Display::setROI(cv::Rect new_roi) { roi = new_roi; };
