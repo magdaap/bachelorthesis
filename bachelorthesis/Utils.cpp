@@ -15,16 +15,6 @@
 
 namespace pt = boost::property_tree;
 
-const char *src_window = "Select ROI";
-
-void Utils::showImages(std::vector<cv::Mat> imgs, std::string title) {
-
-    for (size_t i = 0; i < imgs.size(); i++) {
-        //     std::cout << i << std::endl;
-        imshow(std::to_string(i) + title, imgs[i]);
-    }
-};
-
 // Shorter, boost namespaces are fucking long
 
 std::shared_ptr<Config::Config> Utils::readConfig(const char *url) {
@@ -69,38 +59,4 @@ std::shared_ptr<Config::Config> Utils::readConfig(const char *url) {
     }
 
     return config;
-};
-cv::Point point;
-void setPoint(int event, int x, int y, int flags, void *userdata) {
-
-    if (event == (cv::EVENT_LBUTTONDOWN)) {
-        point.x = x;
-        point.y = y;
-    }
-};
-
-cv::Mat Utils::selectAreaOfInterest(cv::Mat img) {
-    cv::Mat aoi;
-    cv::Point leftup, rightdown;
-    char l;
-    img.copyTo(aoi);
-    while (true) {
-        cv::imshow(src_window, img);
-        cv::setMouseCallback(src_window, setPoint, NULL);
-        l = cv::waitKey(0);
-        if (l == '1') {
-            leftup = point;
-            std::cout << "leftup: " << leftup << std::endl;
-        } else if (l == '2') {
-            rightdown = point;
-            std::cout << "rightdown: " << rightdown << std::endl;
-
-            rectangle(img, leftup, rightdown, cv::Scalar(255));
-        } else if (l == 'q') {
-            cv::destroyWindow(src_window);
-            aoi = aoi( cv::Rect(leftup, rightdown));
-            break;
-        }
-    }
-    return aoi;
 };

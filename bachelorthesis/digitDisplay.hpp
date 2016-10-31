@@ -9,24 +9,27 @@
 #ifndef digitDisplay_hpp
 #define digitDisplay_hpp
 
+#include "Display.hpp"
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
 
-class DigitDisplay {
+class DigitDisplay : public Display {
 
   public:
     DigitDisplay();
-    DigitDisplay(cv::Rect roi, int max);
-    void getText(cv::Mat img);
-    void analyse(cv::Mat img);
-    cv::Mat preprocessImage(cv::Mat img);
-    double getAmount();
+    DigitDisplay(int max);
+
+    virtual void analyse(cv::Mat img) override;
+    virtual double getAmount() override;
     bool roi_isset();
-    void set_roi(cv::Rect roi);
+    virtual void selectRegionOfInterest(const cv::Mat &img) override;
 
   private:
+    cv::Mat preprocessImage(cv::Mat img);
+
+    void getText(cv::Mat img);
+
     int max;
-    cv::Rect roi;
     double shownAmount;
 };
 

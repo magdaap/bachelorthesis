@@ -6,95 +6,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/Utils.cpp"
-            timestampString = "498290969.086657"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "Utils::showImages(std::vector&lt;cv::Mat&gt; imgs, std::string title)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bachelorthesis/circularDisplay.cpp"
-            timestampString = "499448069.017455"
+            timestampString = "499590258.690615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "CircularDisplay::getLineAndScale(Mat img)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/circularDisplay.cpp"
-            timestampString = "499448069.017455"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "CircularDisplay::getLineAndScale(Mat img)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/circularDisplay.cpp"
-            timestampString = "499448069.017455"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "CircularDisplay::getLineAndScale(Mat img)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/circularDisplay.cpp"
-            timestampString = "499448069.017455"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "CircularDisplay::getLineAndScale(Mat img)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/circularDisplay.cpp"
-            timestampString = "499448069.017455"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "CircularDisplay::getLineAndScale(Mat img)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,27 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bachelorthesis/circularDisplay.cpp"
-            timestampString = "499448069.017455"
+            timestampString = "499590258.690615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "CircularDisplay::getLineAndScale(Mat img)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/circularDisplay.cpp"
-            timestampString = "499448069.017455"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "CircularDisplay::getLineAndScale(Mat img)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bachelorthesis/circularDisplay.cpp"
-            timestampString = "499448069.017455"
+            timestampString = "499591299.077256"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "168"
@@ -154,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bachelorthesis/Utils.cpp"
-            timestampString = "499447792.27125"
+            timestampString = "499555251.638833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108">
+            startingLineNumber = "106"
+            endingLineNumber = "106">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -168,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bachelorthesis/Utils.cpp"
-            timestampString = "498766667.858792"
+            timestampString = "499555251.638833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "Utils::readConfig(const char *url)"
             landmarkType = "7">
          </BreakpointContent>
@@ -184,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bachelorthesis/main.cpp"
-            timestampString = "499447877.174305"
+            timestampString = "499589872.673855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166">
+            startingLineNumber = "165"
+            endingLineNumber = "165">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -198,11 +102,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bachelorthesis/main.cpp"
-            timestampString = "499447877.174305"
+            timestampString = "499589872.673855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169">
+            startingLineNumber = "168"
+            endingLineNumber = "168">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -212,59 +116,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bachelorthesis/main.cpp"
-            timestampString = "498928026.950127"
+            timestampString = "499588102.559551"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "main(int argc, const char *argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bachelorthesis/main.cpp"
+            timestampString = "499588102.559551"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "main(int argc, const char *argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bachelorthesis/main.cpp"
+            timestampString = "499588102.559551"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "main(int argc, const char *argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bachelorthesis/Utils.cpp"
+            timestampString = "499555251.638833"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "Utils::readConfig(const char *url)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bachelorthesis/Utils.cpp"
+            timestampString = "499555251.638833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
-            landmarkName = "main(int argc, const char *argv[])"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/main.cpp"
-            timestampString = "499447877.174305"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "main(int argc, const char *argv[])"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/main.cpp"
-            timestampString = "499447877.174305"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "main(int argc, const char *argv[])"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/Utils.cpp"
-            timestampString = "498770827.434895"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
             landmarkName = "Utils::readConfig(const char *url)"
             landmarkType = "7">
          </BreakpointContent>
@@ -276,43 +196,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bachelorthesis/Utils.cpp"
-            timestampString = "498770828.533005"
+            timestampString = "499555251.638833"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "Utils::readConfig(const char *url)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bachelorthesis/Utils.cpp"
+            timestampString = "499555251.638833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
             endingLineNumber = "36"
-            landmarkName = "Utils::readConfig(const char *url)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/Utils.cpp"
-            timestampString = "498770829.980836"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "Utils::readConfig(const char *url)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/Utils.cpp"
-            timestampString = "498770831.302748"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
             landmarkName = "Utils::readConfig(const char *url)"
             landmarkType = "7">
          </BreakpointContent>
@@ -345,38 +249,38 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "24"
             endingLineNumber = "24"
-            landmarkName = "CircularDisplay::CircularDisplay(int radius, cv::Point middle, int min, int max, Rect roi, bool manual)"
+            landmarkName = "CircularDisplay::CircularDisplay(int radius, cv::Point middle, int min, int max, bool manual)"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "CircularDisplay::CircularDisplay(int, cv::Point_&lt;int&gt;, int, int, cv::Rect_&lt;int&gt;)"
+                  symbolName = "CircularDisplay::CircularDisplay(int, cv::Point_&lt;int&gt;, int, int, bool)"
                   moduleName = "bachelorthesis"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/magdalenaprobstl/Documents/Bachelorarbeit/code/bachelorthesis/bachelorthesis/circularDisplay.cpp"
-                  timestampString = "498938251.234199"
+                  timestampString = "499588794.232705"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "26">
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "34">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "CircularDisplay::CircularDisplay(int, cv::Point_&lt;int&gt;, int, int, cv::Rect_&lt;int&gt;)"
+                  symbolName = "CircularDisplay::CircularDisplay(int, cv::Point_&lt;int&gt;, int, int, bool)"
                   moduleName = "bachelorthesis"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/magdalenaprobstl/Documents/Bachelorarbeit/code/bachelorthesis/bachelorthesis/circularDisplay.cpp"
-                  timestampString = "498938251.237853"
+                  timestampString = "499588794.236379"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "24"
                   endingLineNumber = "24"
-                  offsetFromSymbolStart = "26">
+                  offsetFromSymbolStart = "34">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -387,28 +291,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "bachelorthesis/circularDisplay.cpp"
-            timestampString = "499448069.017455"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "CircularDisplay::getLineAndScale(Mat img)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "bachelorthesis/main.cpp"
-            timestampString = "499447877.174305"
+            timestampString = "499588102.559551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "main(int argc, const char *argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -420,13 +308,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bachelorthesis/circularDisplay.cpp"
-            timestampString = "499448069.017455"
+            timestampString = "499590258.690615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "CircularDisplay::getLineAndScale(Mat img)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bachelorthesis/digitDisplay.hpp"
+            timestampString = "499548542.318019"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "class DigitDisplay"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bachelorthesis/main.cpp"
+            timestampString = "499589872.673855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "main(int argc, const char *argv[])"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

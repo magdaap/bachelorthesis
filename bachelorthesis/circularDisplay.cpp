@@ -17,11 +17,11 @@ using namespace cv;
 Point p1, p2, p3;
 int r;
 CircularDisplay::CircularDisplay()
-    : middle(), pointer(), radius(), amount(), roi(), shownAmount(){};
+    : middle(), pointer(), radius(), amount(), shownAmount(){};
 CircularDisplay::CircularDisplay(int radius, cv::Point middle, int min, int max,
-                                 Rect roi, bool manual)
-    : middle(middle), pointer(), radius(radius), amount(), roi(roi), min(min),
-      max(max), shownAmount(), manual(manual){};
+                                 bool manual)
+    : middle(middle), pointer(), radius(radius), amount(), min(min), max(max),
+      shownAmount(), manual(manual){};
 
 const char *analyseCirc = "analyse Circular";
 const char *setConfig = "select Scale with three points";
@@ -60,53 +60,33 @@ std::vector<Point> getLeftRightMost(std::vector<std::vector<Point>> cont) {
     return {leftmost, rightmost};
 };
 
-void CircularDisplay::config(Mat img) {
-    imshow(setConfig, img);
-    setMouseCallback(setConfig, setCoordinates, NULL);
-    char k;
-    while (true) {
-        k = waitKey();
-        if (k == 'c') {
-            setCircleMiddle(p1, p2, p3);
-            setCircleRadius(middle, p1);
-        } else if (k == 'q') {
-            break;
+void CircularDisplay::selectRegionOfInterest(const cv::Mat &img) {
+    selectROI(img);
+
+    if (manual) {
+        imshow(setConfig, regionOfInterest());
+        setMouseCallback(setConfig, setCoordinates, NULL);
+        while (true) {
+            auto k = waitKey(0);
+            if (k == 'c') {
+                setCircleMiddle(p1, p2, p3);
+                setCircleRadius(middle, p1);
+            } else if (k == 'q') {
+                destroyWindow(setConfig);
+                break;
+            }
         }
+        std::cout << "Middle: " << middle << std::endl;
+        std::cout << "Radius: " << radius << std::endl;
     }
-};
-
-void CircularDisplay::analyseManual(Mat img) {
-
-    Mat res, src;
-    char k;
-    Point p;
-    img.copyTo(src);
-    while (true) {
-        k = waitKey(0);
-        if (k == 'q') {
-            destroyWindow(analyseCirc);
-            break;
-
-        } else if (k == 'a') {
-            res = getLineAndScale(src);
-            calculate(res);
-            double a = getLinearAmount(min, max, amount);
-            std::cout << a << " amount" << std::endl;
-            std::string text = std::to_string(a);
-        }
-    };
-};
+}
 
 void CircularDisplay::analyse(Mat img) {
-    Mat res, src;
-    src = img(roi);
-
-    res = getLineAndScale(src);
+    Mat res;
+    res = getLineAndScale(img);
     calculate(res);
-    double a = getLinearAmount(min, max, amount);
-    if(manual){
+    double a = getLinearAmount(min, max);
     std::cout << a << " amount" << std::endl;
-    }
 };
 
 Mat CircularDisplay::getLineAndScale(Mat img) {
@@ -120,10 +100,18 @@ Mat CircularDisplay::getLineAndScale(Mat img) {
     circle(c, middle, radius, Scalar(255, 255, 255), 3, 8, 0);
     if (manual) {
         imshow(progress, c);
-        waitKey();
+        waitKey(0);
+        imshow(progress, l);
+        waitKey(0);
         destroyWindow(progress);
     }
     bitwise_or(c, l, c);
+    if (manual) {
+        imshow(progress, c);
+        waitKey(0);
+        destroyWindow(progress);
+    }
+
     bitwise_not(res, res);
 
     Mat kernel = getStructuringElement(MORPH_RECT, Size(2, 2), Point(-1, -1));
@@ -131,10 +119,12 @@ Mat CircularDisplay::getLineAndScale(Mat img) {
     dilate(c, c, kernel);
     //  cvtColor(res, res, CV_RGB2GRAY);
     bitwise_and(res, c, res);
+
     Canny(res, res, 50, 100, 3, true);
     if (manual) {
         imshow(progress, res);
-        waitKey();
+        waitKey(0);
+        destroyWindow(progress);
     }
     return res;
 };
@@ -166,6 +156,12 @@ Mat CircularDisplay::getLines(Mat img) {
     std::vector<Vec4i> lines, second_lines;
     Mat element = getStructuringElement(MORPH_RECT, Size(2, 2), Point(-1, -1));
     erode(img, img, element);
+    fastNlMeansDenoising(img, img);
+    if (manual){
+        imshow("denoise", img);
+        waitKey(0);
+        destroyWindow("denoise");
+    }
 
     blur(img, img, Size(3, 3));
 
@@ -177,8 +173,8 @@ Mat CircularDisplay::getLines(Mat img) {
     middlelines = Mat(img.rows, img.cols, CV_8UC1);
     for (size_t i = 0; i < lines.size(); i++) {
         Vec4i l = lines[i];
-        if(manual){
-        std::cout << l << std::endl;
+        if (manual) {
+            std::cout << l << std::endl;
         }
         line(result, Point(l[0], l[1]), Point(l[2], l[3]),
              Scalar(255, 255, 255), 2, 8, 0);
@@ -189,7 +185,7 @@ Mat CircularDisplay::getLines(Mat img) {
         pointer = Point(-1, -1);
     }
     //  imshow("middle", result);
-    if (manual) {
+   /* if (manual) {
         // gets the exact pointer
         bitwise_not(result, result);
         bitwise_and(result, middlelines, result);
@@ -209,7 +205,7 @@ Mat CircularDisplay::getLines(Mat img) {
         } else {
             pointer = Point(-1, -1);
         }
-    }
+    }*/
     return result;
 };
 
@@ -232,6 +228,14 @@ void CircularDisplay::calculate(const Mat img) {
         rightvec(rightmost.x - middle.x, rightmost.y - middle.y),
         pointervec(pointer.x - middle.x, pointer.y - middle.y);
 
+    line(test, leftmost, middle, Scalar(255, 255, 255));
+    line(test, rightmost, middle, Scalar(255, 255, 255));
+    line(test, pointer, middle, Scalar(255, 255, 255));
+    if (manual){
+        imshow(progress, test);
+        waitKey(0);
+        destroyWindow(progress);
+    }
     // normalize every pointer for calculation
     leftvec.normalize();
     rightvec.normalize();
@@ -253,16 +257,19 @@ void CircularDisplay::calculate(const Mat img) {
 };
 
 // calculates Linear Amount
-double CircularDisplay::getLinearAmount(double minAmount, double maxAmount,
-                                        double amount) {
+double CircularDisplay::getLinearAmount(double minAmount, double maxAmount) {
     shownAmount = (amount * maxAmount) + minAmount;
+    return shownAmount;
+};
+
+double CircularDisplay::getLogarithmicAmount(double minAmount, double maxAmount,
+                                             double base) {
+    shownAmount = log(getLinearAmount(minAmount, maxAmount)) / log(base);
     return shownAmount;
 };
 
 double CircularDisplay::getAmount() { return shownAmount; };
 
 bool CircularDisplay::roi_isset() {
-    return (roi != Rect(Point(0, 0), Point(0, 0)));
+    return (regionOfInterestRect() != Rect(Point(0, 0), Point(0, 0)));
 };
-
-void CircularDisplay::set_roi(Rect roi) { this->roi = roi; };

@@ -17,9 +17,7 @@ class Utils {
     Utils(){};
 
   public:
-    static void showImages(std::vector<cv::Mat> srcs, std::string title);
     static std::shared_ptr<Config::Config> readConfig(const char *url);
-    static cv::Mat selectAreaOfInterest(cv::Mat src);
 };
 
 #endif /* Utils_hpp */

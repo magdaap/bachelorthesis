@@ -11,17 +11,25 @@
 #include <tesseract/baseapi.h>
 
 using namespace cv;
-DigitDisplay::DigitDisplay() : shownAmount(){};
-DigitDisplay::DigitDisplay(Rect roi, int max) : roi(roi), shownAmount(), max(max){};
 
 const char *tessdata = "/Users/magdalenaprobstl/Documents/Bachelorarbeit/code/"
                        "bachelorthesis/bachelorthesis/resources/";
 
-void DigitDisplay::analyse(Mat img) {
-    Mat src, res;
-    src = img(roi);
+thread_local std::unique_ptr<tesseract::TessBaseAPI> tess;
 
-    res = preprocessImage(src);
+DigitDisplay::DigitDisplay() : shownAmount(){};
+
+DigitDisplay::DigitDisplay(int max) : max(max), shownAmount() {
+    if (!tess) {
+        tess.reset(new tesseract::TessBaseAPI);
+        tess->Init(tessdata, "letsgodigital");
+    }
+};
+
+void DigitDisplay::analyse(Mat img) {
+    Mat res;
+
+    res = preprocessImage(img);
     getText(res);
     // imshow("getElements", elements);
 }
@@ -46,15 +54,13 @@ Mat DigitDisplay::preprocessImage(Mat img) {
 
 void DigitDisplay::getText(Mat img) {
 
-    tesseract::TessBaseAPI tess;
-    tess.Init(tessdata, "letsgodigital");
-    tess.SetImage((uchar *)img.data, img.size().width, img.size().height,
-                  img.channels(), (int)img.step1());
-    tess.Recognize(0);
-    const char *out = tess.GetUTF8Text();
+    tess->SetImage((uchar *)img.data, img.size().width, img.size().height,
+                   img.channels(), (int)img.step1());
+    tess->Recognize(0);
+    const char *out = tess->GetUTF8Text();
     shownAmount = atof(out);
-    while(shownAmount> max){
-        shownAmount = shownAmount/10;
+    while (shownAmount > max) {
+        shownAmount = shownAmount / 10;
     }
     std::cout << shownAmount << std::endl;
 };
@@ -62,7 +68,7 @@ void DigitDisplay::getText(Mat img) {
 double DigitDisplay::getAmount() { return shownAmount; }
 
 bool DigitDisplay::roi_isset() {
-    return (roi != Rect(Point(0, 0), Point(0, 0)));
+    return (regionOfInterestRect() != Rect(Point(0, 0), Point(0, 0)));
 };
 
-void DigitDisplay::set_roi(Rect roi) { this->roi = roi; };
+void DigitDisplay::selectRegionOfInterest(const Mat &img) { selectROI(img); };
