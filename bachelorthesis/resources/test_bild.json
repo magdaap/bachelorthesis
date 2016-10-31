@@ -1,0 +1,20 @@
+{
+  "scales": [
+    {
+      "type": "analog",
+      "range": {
+        "min": 0,
+        "max": 100
+      },
+      "middleX": 238,
+      "middleY": 354,
+      "roiLeftX": 53,
+      "roiLeftY": 15,
+      "roiRightX":530,
+      "roiRightY":234,
+      "radius": 319
+    }
+  ],
+  "manual": "true",
+  "video": "false"
+}

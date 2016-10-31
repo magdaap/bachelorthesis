@@ -15,10 +15,8 @@
 
 #include <boost/variant.hpp>
 
-// Lets use a class for nice, epic immutable containedness
 class Config {
 
-    // Base Scale configuration object, all shared values go here
     struct Scale {
         Scale(int min, int max, int roiLeftX, int roiLeftY, int roiRightX,
               int roiRightY);
@@ -32,8 +30,6 @@ class Config {
     };
 
   public:
-    // The CircularScale object, inherits from Scale
-    // Holds the CircularScale-only values
     struct CircularScale : public Scale {
         CircularScale(int min, int max, int roiLeftX, int roiLeftY,
                       int roiRightX, int roiRightY, const int middleX,
@@ -44,7 +40,6 @@ class Config {
         const int radius;
     };
 
-    // Same as CircularScale, but Digit!
     struct DigitScale : public Scale {
         DigitScale(int min, int max, int roiLeftX, int roiLeftY, int roiRightX,
                    int roiRightY, const int digitCount);
@@ -54,14 +49,11 @@ class Config {
 
     using ScaleVariant = boost::variant<CircularScale, DigitScale>;
 
-    // Simply the constructor for our class
     Config(bool video, bool manual);
 
     template <typename T> void addScale(const T &scale) {
         scales.emplace_back(scale);
     }
-
-    // Self-explanatory from here on
 
     /* --- Getter start --- */
     bool is_video() const;

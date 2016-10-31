@@ -13,13 +13,6 @@
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
 
-class Utils {
-    Utils(){};
-
-  public:
-    static void showImages(std::vector<cv::Mat> srcs, std::string title);
-    static std::shared_ptr<Config::Config> readConfig(const char *url);
-    static cv::Mat selectAreaOfInterest(cv::Mat src);
-};
+std::shared_ptr<Config::Config> readConfig(const char *url);
 
 #endif /* Utils_hpp */

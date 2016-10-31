@@ -46,7 +46,8 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
-      useCustomWorkingDirectory = "NO"
+      useCustomWorkingDirectory = "YES"
+      customWorkingDirectory = "/Users/magdalenaprobstl/Documents/Bachelorarbeit/code/bachelorthesis/bachelorthesis"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
@@ -63,11 +64,11 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "&quot;/Users/magdalenaprobstl/Desktop/test_video1_kurz.mp4&quot;"
+            argument = "&quot;/Users/magdalenaprobstl/Documents/Bachelorarbeit/code/bachelorthesis/bachelorthesis/resources/test_video1_kurz.mp4&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "&quot;/Users/magdalenaprobstl/Desktop/test.json&quot;"
+            argument = "&quot;/Users/magdalenaprobstl/Documents/Bachelorarbeit/code/bachelorthesis/bachelorthesis/resources/test_video.json&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

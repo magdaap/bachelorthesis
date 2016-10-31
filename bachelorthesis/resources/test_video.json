@@ -1,0 +1,32 @@
+{
+  "scales": [
+    {
+      "type": "analog",
+      "range": {
+        "min": 0,
+        "max": 250
+      },
+      "middleX": 185,
+      "middleY": 362,
+      "roiLeftX": 706,
+      "roiLeftY": 112,
+      "roiRightX":1086,
+      "roiRightY":318,
+      "radius": 317
+    },
+    {
+      "type": "digital",
+      "range": {
+        "min": 0,
+        "max": 10
+      },
+      "digitCount": 4,
+      "roiLeftX": 240,
+      "roiLeftY": 141,
+      "roiRightX": 424,
+      "roiRightY": 240
+    }
+  ],
+  "manual": "false",
+  "video": "true"
+}
