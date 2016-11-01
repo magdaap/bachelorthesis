@@ -19,7 +19,7 @@ void setPoint(int event, int x, int y, int flags, void *userdata) {
     }
 }
 
-void Display::selectROI(const cv::Mat &img) {
+void Display::selectROI(cv::Mat img) {
     cv::Mat roi_img;
     cv::Point leftup, rightdown;
     char l;
@@ -49,8 +49,8 @@ void Display::selectROI(const cv::Mat &img) {
     }
 };
 
-const cv::Rect &Display::regionOfInterestRect() { return roi; }
+cv::Rect Display::regionOfInterestRect() { return roi; }
 
-const cv::Mat &Display::regionOfInterest() { return roiImg; }
+cv::Mat Display::regionOfInterest() { return roiImg; }
 
 void Display::setROI(cv::Rect new_roi) { roi = new_roi; };

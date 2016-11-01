@@ -21,19 +21,19 @@ class Display {
      * @param baseImage
      * @return True if calibrating was successful, false otherwise
      */
-    virtual void selectRegionOfInterest(const cv::Mat &img) = 0;
+    virtual void selectRegionOfInterest(cv::Mat img) = 0;
 
     virtual void analyze(cv::Mat img) = 0;
 
     virtual double getAmount() = 0;
 
-    const cv::Mat &regionOfInterest();
+    cv::Mat regionOfInterest();
 
-    const cv::Rect &regionOfInterestRect();
+    cv::Rect regionOfInterestRect();
     void setROI(cv::Rect roi);
 
   protected:
-    void selectROI(const cv::Mat &img);
+    void selectROI(cv::Mat img);
 
   private:
     cv::Rect roi;

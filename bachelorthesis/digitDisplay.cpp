@@ -37,7 +37,7 @@ void DigitDisplay::analyze(Mat img) {
 
 Mat DigitDisplay::preprocessImage(Mat img) {
     Mat dest, src_gray;
-    
+
     cvtColor(img, src_gray, CV_BGR2GRAY);
     blur(src_gray, src_gray, Size(3, 3));
     fastNlMeansDenoising(src_gray, src_gray);
@@ -54,15 +54,17 @@ Mat DigitDisplay::preprocessImage(Mat img) {
 };
 
 void DigitDisplay::getText(Mat img) {
-    
+    tess->SetVariable("tessedit_char_whitelist", "1234567890");
 
     tess->SetImage((uchar *)img.data, img.size().width, img.size().height,
                    img.channels(), (int)img.step1());
     tess->Recognize(0);
     const char *out = tess->GetUTF8Text();
+    std::cout << out << std::endl;
+
     shownAmount = atof(out);
     while (shownAmount > max) {
-          shownAmount = shownAmount / 10;
+        shownAmount = shownAmount / 10;
     }
     std::cout << shownAmount << std::endl;
 };
@@ -73,4 +75,4 @@ bool DigitDisplay::roiIsset() {
     return (regionOfInterestRect() != Rect(Point(0, 0), Point(0, 0)));
 };
 
-void DigitDisplay::selectRegionOfInterest(const Mat &img) { selectROI(img); };
+void DigitDisplay::selectRegionOfInterest(Mat img) { selectROI(img); };

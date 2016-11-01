@@ -15,13 +15,17 @@
 using namespace cv;
 
 Point p1, p2, p3;
-int r;
 CircularDisplay::CircularDisplay()
-    : middle(), pointer(), radius(), amount(), shownAmount(){};
+    : middle(), pointer(), radius(), amount(), shownAmount(),
+      testDeleteLATER() {
+    testDeleteLATER = 0;
+};
 CircularDisplay::CircularDisplay(int radius, cv::Point middle, int min, int max,
                                  bool manual)
     : middle(middle), pointer(), radius(radius), amount(), min(min), max(max),
-      shownAmount(), manual(manual){};
+      shownAmount(), manual(manual), testDeleteLATER() {
+    testDeleteLATER = 0;
+};
 
 // Names for imshow()
 const char *analyzeCirc = "analyze Circular";
@@ -67,17 +71,18 @@ void CircularDisplay::analyze(Mat img) {
     calculate(res);
     double a = getLinearAmount(min, max);
     std::cout << a << " amount" << std::endl;
+    testDeleteLATER++;
 };
 
 // returns an image containing the sceleton of the scale and the pointer
-Mat CircularDisplay::getLineAndScale(Mat img) {
+Mat CircularDisplay::getLineAndScale(Mat src) {
     Mat c, l, res;
-    img.copyTo(res);
+    src.copyTo(res);
     // two empty pictures for
-    c = Mat(img.rows, img.cols, CV_8UC1);
-    l = Mat(img.rows, img.cols, CV_8UC1);
+    c = Mat(src.rows, src.cols, CV_8UC1);
+    l = Mat(src.rows, src.cols, CV_8UC1);
 
-    l = getLines(img);
+    l = getLines(res);
     circle(c, middle, radius, Scalar(255, 255, 255), 3, 8, 0);
     if (manual) {
         imshow("c", c);
@@ -131,7 +136,7 @@ Mat CircularDisplay::getLineAndScale(Mat img) {
 };
 
 Mat CircularDisplay::getLines(Mat img) {
-    Mat dest, edges, result, middlelines, asdf;
+    Mat dest, edges, result, middlelines;
     std::vector<Vec4i> lines, second_lines;
 
     threshold(img, img, 60, 250, THRESH_BINARY);
@@ -156,7 +161,7 @@ Mat CircularDisplay::getLines(Mat img) {
 
     result = Mat(img.rows, img.cols, CV_8UC1);
     middlelines = Mat(img.rows, img.cols, CV_8UC1);
-    
+
     if ((lines.size() != 0) && (lines.size() < 10)) {
 
         pointer = Point(lines[0][2], lines[0][3]);
@@ -169,7 +174,7 @@ Mat CircularDisplay::getLines(Mat img) {
     return result;
 };
 
-void CircularDisplay::selectRegionOfInterest(const cv::Mat &img) {
+void CircularDisplay::selectRegionOfInterest(Mat img) {
     selectROI(img);
 
     if (manual) {
@@ -200,8 +205,8 @@ bool CircularDisplay::roiIsset() {
 
 /** Calculates the center of the circle which is defined by the three points
  */
-void CircularDisplay::setCircleMiddle(const Point point1, const Point point2,
-                                      const Point point3) {
+void CircularDisplay::setCircleMiddle(Point point1, Point point2,
+                                      Point point3) {
 
     Eigen::Matrix3f A;
     Eigen::Vector3f b;
@@ -237,12 +242,13 @@ double CircularDisplay::getLogarithmicAmount(double minAmount, double maxAmount,
     return shownAmount;
 };
 
-void CircularDisplay::calculate(const Mat img) {
+void CircularDisplay::calculate(Mat img) {
     Mat src = Mat::zeros(img.rows, img.cols, CV_8UC1);
     line(src, pointer, middle, Scalar(255, 255, 255));
     circle(src, middle, radius, Scalar(255, 255, 255));
     std::vector<std::vector<Point>> contours;
-    if (pointer == Point(-1, -1)) {
+    if ((pointer.x == -1) && (pointer.y == -1)) {
+        amount = 0;
         std::cout << "No pointer was recognized" << std::endl;
         return;
     }
@@ -257,10 +263,10 @@ void CircularDisplay::calculate(const Mat img) {
         rightvec(rightmost.x - middle.x, rightmost.y - middle.y),
         pointervec(pointer.x - middle.x, pointer.y - middle.y);
 
-        if (manual) {
-            line(src, leftmost, middle, Scalar(255, 255, 255));
-            line(src, rightmost, middle, Scalar(255, 255, 255));
-            line(src, pointer, middle, Scalar(255, 255, 255));
+    if (manual) {
+        line(src, leftmost, middle, Scalar(255, 255, 255));
+        line(src, rightmost, middle, Scalar(255, 255, 255));
+        line(src, pointer, middle, Scalar(255, 255, 255));
 
         imshow(progress, src);
         waitKey(0);
