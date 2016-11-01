@@ -23,7 +23,7 @@ class CircularDisplay : public Display {
 
     void config(cv::Mat img);
 
-    virtual void selectRegionOfInterest(const cv::Mat &img) override;
+    virtual void selectRegionOfInterest(cv::Mat img) override;
 
     virtual double getAmount() override;
     bool roiIsset();
@@ -44,6 +44,7 @@ class CircularDisplay : public Display {
     int min;
     int max;
     bool manual;
+    int testDeleteLATER;
 };
 
 #endif /* circularDisplay_hpp */

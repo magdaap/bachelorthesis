@@ -70,11 +70,9 @@ int main(int argc, const char *argv[]) {
         cv::Mat bg;
         cv::Mat src;
 
-        std::ofstream analogResultFile;
-        std::ofstream digitalResultFile;
-        analogResultFile.open("resources/analog_results.txt");
-        digitalResultFile.open("resources/digital_results.txt");
-       
+        std::ofstream resultFile;
+        resultFile.open("resources/results.txt");
+
         bool isfirst = true;
         while (true) {
 
@@ -85,40 +83,43 @@ int main(int argc, const char *argv[]) {
                 cvtColor(src, src, CV_BGR2GRAY);
             }
 
+            if ((src.rows <= 0) || (src.cols <= 0)) {
+                std::cout << "Video is finished." << std::endl;
+                break;
+            }
+
             for (int i = 0; i < cds.size(); i++) {
-                if (!cds[i].roiIsset()) {
-                    cds[i].selectRegionOfInterest(src);
-                }
-                mog->apply(src(cds[i].regionOfInterestRect()), bg);
-                if (config->is_manual()) {
-                    imshow("frame", src(cds[i].regionOfInterestRect()));
-                    waitKey(0);
-                    imshow("frame", bg);
-                    waitKey(0);
-                }
-                if (!config->is_video()) {
-                    cds[i].analyze(src(cds[i].regionOfInterestRect()));
-                } else if (isfirst) {
-                    isfirst = false;
-                } else {
-                    cds[i].analyze(bg);
-                }
-                analogResultFile << cds[i].getAmount() << std::endl;
+                /*        if (!cds[i].roiIsset()) {
+                            cds[i].selectRegionOfInterest(src);
+                        }
+                        mog->apply(src(cds[i].regionOfInterestRect()), bg);
+                        if (config->is_manual()) {
+                            imshow("frame", src(cds[i].regionOfInterestRect()));
+                            waitKey(0);
+                        }
+                        if (!config->is_video()) {
+                            cds[i].analyze(src(cds[i].regionOfInterestRect()));
+                        } else if (isfirst) {
+                            isfirst = false;
+                        } else {
+                            cds[i].analyze(bg);
+                        }
+                        resultFile << cds[i].getAmount();*/
             }
 
             for (int i = 0; i < dds.size(); i++) {
                 if (!dds[i].roiIsset()) {
                     dds[i].selectRegionOfInterest(src);
                 }
-                      dds[i].analyze(src(dds[i].regionOfInterestRect()));
-                    digitalResultFile << dds[i].getAmount() << std::endl;
+                dds[i].analyze(src(dds[i].regionOfInterestRect()));
+                resultFile << dds[i].getAmount() << "    ";
             }
+            resultFile << std::endl;
             if (!config->is_video()) {
                 break;
             }
         }
-        analogResultFile.close();
-        digitalResultFile.close();
+        resultFile.close();
         return 0;
 
     } catch (std::exception &e) {

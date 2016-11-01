@@ -21,14 +21,15 @@ class DigitDisplay : public Display {
 
     virtual void analyze(cv::Mat img) override;
     virtual double getAmount() override;
+    char *getAmountString();
     bool roiIsset();
-    virtual void selectRegionOfInterest(const cv::Mat &img) override;
+    virtual void selectRegionOfInterest(cv::Mat img) override;
 
   private:
     cv::Mat preprocessImage(cv::Mat img);
 
     void getText(cv::Mat img);
-
+    char *amountString;
     int max;
     double shownAmount;
     bool manual;
