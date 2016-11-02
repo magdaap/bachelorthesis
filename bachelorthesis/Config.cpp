@@ -13,12 +13,12 @@ Config::Scale::Scale(int min, int max, int roiLeftX, int roiLeftY,
     : min(min), max(max), roiLeftX(roiLeftX), roiLeftY(roiLeftY),
       roiRightX(roiRightX), roiRightY(roiRightY) {}
 
-Config::CircularScale::CircularScale(int min, int max, int roiLeftX,
+Config::CircularScale::CircularScale(int min, int max, int base, int roiLeftX,
                                      int roiLeftY, int roiRightX, int roiRightY,
                                      const int middleX, const int middleY,
-                                     const int radius)
+                                     const int radius, const std::string calculationType)
     : Scale(min, max, roiLeftX, roiLeftY, roiRightX, roiRightY),
-      middleX(middleX), middleY(middleY), radius(radius) {}
+      middleX(middleX), middleY(middleY), radius(radius), base(base) {}
 
 Config::DigitScale::DigitScale(int min, int max, int roiLeftX, int roiLeftY,
                                int roiRightX, int roiRightY,

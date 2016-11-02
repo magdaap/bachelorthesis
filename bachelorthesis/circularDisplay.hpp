@@ -16,8 +16,8 @@
 class CircularDisplay : public Display {
   public:
     CircularDisplay();
-    CircularDisplay(int radius, cv::Point middle, int min, int max,
-                    bool manual);
+    CircularDisplay(int radius, cv::Point middle, int min, int max, int base,
+                    bool manual, std::string calculationType);
 
     virtual void analyze(cv::Mat img) override;
 
@@ -44,7 +44,9 @@ class CircularDisplay : public Display {
     int min;
     int max;
     bool manual;
-    int testDeleteLATER;
+    int countFrame;
+    std::string calculationType;
+    int base;
 };
 
 #endif /* circularDisplay_hpp */

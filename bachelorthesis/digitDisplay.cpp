@@ -37,9 +37,23 @@ void DigitDisplay::analyze(Mat img) {
 
 Mat DigitDisplay::preprocessImage(Mat img) {
     Mat dest, src_gray;
-
+    if (manual) {
+        imshow(progressDigit, img);
+        waitKey(0);
+        destroyWindow(progressDigit);
+    }
     cvtColor(img, src_gray, CV_BGR2GRAY);
+    if (manual) {
+        imshow(progressDigit, src_gray);
+        waitKey(0);
+        destroyWindow(progressDigit);
+    }
     blur(src_gray, src_gray, Size(3, 3));
+    if (manual) {
+        imshow(progressDigit, src_gray);
+        waitKey(0);
+        destroyWindow(progressDigit);
+    }
     fastNlMeansDenoising(src_gray, src_gray);
 
     if (manual) {
@@ -48,8 +62,25 @@ Mat DigitDisplay::preprocessImage(Mat img) {
         destroyWindow(progressDigit);
     }
 
-    threshold(src_gray, dest, 100, 255, THRESH_BINARY);
+    threshold(src_gray, dest, 90, 255, THRESH_BINARY);
+    if (manual) {
+
+        imshow(progressDigit, dest);
+        waitKey(0);
+        destroyWindow(progressDigit);
+    }
+
     bitwise_not(dest, dest);
+    Mat element = getStructuringElement(MORPH_RECT, Size(3, 3), Point(-1, -1));
+    /// Apply the erosion operation
+    //   dilate(dest, dest, element);
+    erode(dest, dest, element);
+    if (manual) {
+        imshow(progressDigit, dest);
+        waitKey(0);
+        destroyWindow(progressDigit);
+    }
+
     return dest;
 };
 

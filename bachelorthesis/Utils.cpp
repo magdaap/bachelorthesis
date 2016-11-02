@@ -43,9 +43,9 @@ std::shared_ptr<Config::Config> readConfig(const char *url) {
         if (type == "analog") {
             // Here we have analog
             config->addScale(Config::CircularScale(
-                min, max, roiLeftX, roiLeftY, roiRightX, roiRightY,
+                min, max, scale.get<int>("base") ,roiLeftX, roiLeftY, roiRightX, roiRightY,
                 scale.get<int>("middleX"), scale.get<int>("middleY"),
-                scale.get<int>("radius")));
+                                                   scale.get<int>("radius"), scale.get<std::string>("calculationType")));
         } else if (type == "digital") {
             // Here we have digital
             config->addScale(Config::DigitScale(min, max, roiLeftX, roiLeftY,
