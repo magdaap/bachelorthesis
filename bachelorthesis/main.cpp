@@ -42,7 +42,7 @@ int main(int argc, const char *argv[]) {
                 auto scale = boost::get<Config::CircularScale>(scaleVariant);
                 CircularDisplay cd = CircularDisplay(
                     scale.radius, cv::Point(scale.middleX, scale.middleY),
-                    scale.min, scale.max, config->is_manual());
+                    scale.min, scale.max, scale.base, config->is_manual(), scale.calculationType);
                 cd.setROI(Rect(Point(scale.roiLeftX, scale.roiLeftY),
                                Point(scale.roiRightX, scale.roiRightY)));
                 cds.push_back(cd);
@@ -54,7 +54,6 @@ int main(int argc, const char *argv[]) {
                 dd.setROI(Rect(Point(scale.roiLeftX, scale.roiLeftY),
                                Point(scale.roiRightX, scale.roiRightY)));
                 dds.push_back(dd);
-                // auto scale = boost::get<Config::DigitScale>(scaleVariant);
             }
         }
         auto mog = createBackgroundSubtractorMOG2();
@@ -89,30 +88,31 @@ int main(int argc, const char *argv[]) {
             }
 
             for (int i = 0; i < cds.size(); i++) {
-                /*        if (!cds[i].roiIsset()) {
-                            cds[i].selectRegionOfInterest(src);
-                        }
-                        mog->apply(src(cds[i].regionOfInterestRect()), bg);
-                        if (config->is_manual()) {
-                            imshow("frame", src(cds[i].regionOfInterestRect()));
-                            waitKey(0);
-                        }
-                        if (!config->is_video()) {
-                            cds[i].analyze(src(cds[i].regionOfInterestRect()));
-                        } else if (isfirst) {
-                            isfirst = false;
-                        } else {
-                            cds[i].analyze(bg);
-                        }
-                        resultFile << cds[i].getAmount();*/
+                if (!cds[i].roiIsset()) {
+                    cds[i].selectRegionOfInterest(src);
+                }
+                mog->apply(src(cds[i].regionOfInterestRect()), bg);
+                if (config->is_manual()) {
+                    imshow("frame", src(cds[i].regionOfInterestRect()));
+                    waitKey(0);
+                }
+                if (!config->is_video()) {
+                    cds[i].analyze(src(cds[i].regionOfInterestRect()));
+                } else if (isfirst) {
+                    cds[i].analyze(src(cds[i].regionOfInterestRect()));
+                    isfirst = false;
+                } else {
+                    cds[i].analyze(bg);
+                }
+                resultFile << cds[i].getAmount();
             }
 
             for (int i = 0; i < dds.size(); i++) {
                 if (!dds[i].roiIsset()) {
                     dds[i].selectRegionOfInterest(src);
                 }
-                dds[i].analyze(src(dds[i].regionOfInterestRect()));
-                resultFile << dds[i].getAmount() << "    ";
+                 dds[i].analyze(src(dds[i].regionOfInterestRect()));
+                 resultFile << dds[i].getAmount() << "    ";
             }
             resultFile << std::endl;
             if (!config->is_video()) {

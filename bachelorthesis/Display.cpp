@@ -25,7 +25,7 @@ void Display::selectROI(cv::Mat img) {
     char l;
     img.copyTo(roi_img);
     while (true) {
-        cv::imshow(src_window, img);
+        cv::imshow(src_window, roi_img);
         cv::setMouseCallback(src_window, setPoint, NULL);
         l = cv::waitKey(0);
         if (l == '1') {
@@ -33,14 +33,14 @@ void Display::selectROI(cv::Mat img) {
             std::cout << "leftup: " << leftup << std::endl;
         } else if (l == '2') {
             rightdown = point;
-            std::cout << "rightdown: " << rightdown << std::endl;
+            std::cout << "rightddown: " << rightdown << std::endl;
 
-            rectangle(img, leftup, rightdown, cv::Scalar(0));
+            rectangle(roi_img, leftup, rightdown, cv::Scalar(0));
         } else if (l == 'q') {
             cv::destroyWindow(src_window);
             roi = cv::Rect(leftup, rightdown);
-            roiImg = roi_img(roi);
-            imshow("finish", roi_img);
+            roiImg = img(roi);
+            imshow("finish", roiImg);
             cv::waitKey(0);
             cv::destroyWindow("finish");
 

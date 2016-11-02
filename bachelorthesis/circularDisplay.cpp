@@ -16,15 +16,14 @@ using namespace cv;
 
 Point p1, p2, p3;
 CircularDisplay::CircularDisplay()
-    : middle(), pointer(), radius(), amount(), shownAmount(),
-      testDeleteLATER() {
-    testDeleteLATER = 0;
+    : middle(), pointer(), radius(), amount(), shownAmount(), countFrame() {
+    countFrame = 0;
 };
-CircularDisplay::CircularDisplay(int radius, cv::Point middle, int min, int max,
-                                 bool manual)
-    : middle(middle), pointer(), radius(radius), amount(), min(min), max(max),
-      shownAmount(), manual(manual), testDeleteLATER() {
-    testDeleteLATER = 0;
+CircularDisplay::CircularDisplay(int radius, cv::Point middle, int min, int max, int base,
+                                 bool manual,std::string calculationType)
+    : middle(middle), pointer(), radius(radius), amount(), min(min), max(max), base(base),
+      shownAmount(), manual(manual), countFrame(), calculationType(calculationType) {
+    countFrame = 0;
 };
 
 // Names for imshow()
@@ -69,9 +68,15 @@ void CircularDisplay::analyze(Mat img) {
     Mat res;
     res = getLineAndScale(img);
     calculate(res);
-    double a = getLinearAmount(min, max);
+    double a;
+    if (calculationType == "linear"){
+         a = getLinearAmount(min, max);
+    }
+    else if (calculationType == "logarithmic"){
+        a = getLogarithmicAmount(min, max, base);
+    }
     std::cout << a << " amount" << std::endl;
-    testDeleteLATER++;
+    countFrame++;
 };
 
 // returns an image containing the sceleton of the scale and the pointer
@@ -139,59 +144,102 @@ Mat CircularDisplay::getLines(Mat img) {
     Mat dest, edges, result, middlelines;
     std::vector<Vec4i> lines, second_lines;
 
-    threshold(img, img, 60, 250, THRESH_BINARY);
+   
+    if (countFrame != 0) {
+        threshold(img, img, 60, 250, THRESH_BINARY);
+
+    } else {
+        threshold(img, img, 140, 250, THRESH_BINARY);
+
+        cvtColor(img, img, CV_BGR2GRAY);
+    }
     if (manual) {
-        imshow("denoise", img);
+        imshow(progress, img);
         waitKey(0);
-        destroyWindow("denoise");
     }
     fastNlMeansDenoising(img, img, 30);
+
     if (manual) {
-        imshow("denoise", img);
+        imshow(progress, img);
         waitKey(0);
-        destroyWindow("denoise");
     }
     Canny(img, edges, 50, 200, 3, true);
     if (manual) {
-        imshow("denoise", edges);
+        imshow(progress, edges);
         waitKey(0);
-        destroyWindow("denoise");
+        destroyWindow(progress);
     }
     HoughLinesP(img, lines, 1, CV_PI / 180, 50, 50, 1);
 
     result = Mat(img.rows, img.cols, CV_8UC1);
     middlelines = Mat(img.rows, img.cols, CV_8UC1);
+    Mat firstalllines = Mat(img.rows, img.cols, CV_8UC1);
+    
+    for (size_t i = 0; i < lines.size(); i++) {
+        Vec4i l = lines[i];
+        if (manual) {
+            std::cout << l << std::endl;
+        }
+        line(middlelines, Point(l[0], l[1]), Point(l[2], l[3]),
+             Scalar(255, 255, 255), 2, 8, 0);
+        line(firstalllines, middle, Point(l[2], l[3]),
+             Scalar(255, 255, 255), 2, 8, 0);
 
-    if ((lines.size() != 0) && (lines.size() < 10)) {
+        
+    }
+    if ((lines.size() != 0) && (lines.size() < 10) && (countFrame != 0)) {
 
         pointer = Point(lines[0][2], lines[0][3]);
-        line(result, pointer, middle, Scalar(255, 255, 255), 2, 8, 0);
+        line(result, pointer, middle, Scalar(0, 0, 0), 2, 8, 0);
 
-    } else {
+    } else if (countFrame != 0) {
         pointer = Point(-1, -1);
     }
+    
+    else {
+        if(manual){
+            imshow("middle", middlelines);
+            imshow("test", firstalllines);
+            waitKey(0);
+        }
+        // gets the exact pointer
+        bitwise_not(firstalllines, firstalllines);
+        bitwise_and(firstalllines, middlelines, firstalllines);
+        HoughLinesP(firstalllines, second_lines, 1, CV_PI / 180, 40, 70, 1);
+        for (size_t i = 0; i < second_lines.size(); i++) {
+            Vec4i b = second_lines[i];
 
+            line(firstalllines, Point(b[0], b[1]), Point(b[2], b[3]),
+                 Scalar(255, 255, 255), 2, 8, 0);
+        }
+        pointer = Point(second_lines[0][2], second_lines[0][3]);
+        line(result, pointer, middle, Scalar(0, 0, 0), 2, 8, 0);
+
+        if(manual){
+            imshow("test", result);
+            waitKey(0);
+        }
+    }
     return result;
 };
 
 void CircularDisplay::selectRegionOfInterest(Mat img) {
     selectROI(img);
 
-    if (manual) {
+    if (((middle.x == 0) && (middle.y == 0)) || (radius == 0)) {
         imshow(setConfig, regionOfInterest());
         setMouseCallback(setConfig, setCoordinates, NULL);
-        while (true) {
+        while (radius == 0) {
             auto k = waitKey(0);
             if (k == 'c') {
                 setCircleMiddle(p1, p2, p3);
                 setCircleRadius(middle, p1);
-            } else if (k == 'q') {
-                destroyWindow(setConfig);
-                break;
             }
         }
         std::cout << "Middle: " << middle << std::endl;
         std::cout << "Radius: " << radius << std::endl;
+        destroyWindow(setConfig);
+
     }
 }
 
@@ -290,4 +338,5 @@ void CircularDisplay::calculate(Mat img) {
 
     // amount independent of scale
     amount = angleAmount / angleGeneral;
+    std::cout << amount << " angle amount" << std::endl;
 };
