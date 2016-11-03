@@ -13,7 +13,7 @@
       "roiRightX":1086,
       "roiRightY":318,
       "radius": 317,
-      "calculationType": "linear",
+      "calculationType": 0,
       "base": 0
     },
     {
@@ -29,6 +29,6 @@
       "roiRightY": 240
     }
   ],
-  "manual": "true",
+  "manual": "false",
   "video": "true"
 }

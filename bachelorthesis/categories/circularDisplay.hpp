@@ -17,7 +17,7 @@ class CircularDisplay : public Display {
   public:
     CircularDisplay();
     CircularDisplay(int radius, cv::Point middle, int min, int max, int base,
-                    bool manual, std::string calculationType);
+                    bool manual, int calculationType);
 
     virtual void analyze(cv::Mat img) override;
 
@@ -45,7 +45,7 @@ class CircularDisplay : public Display {
     int max;
     bool manual;
     int countFrame;
-    std::string calculationType;
+    int calculationType;
     int base;
 };
 
