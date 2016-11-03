@@ -33,12 +33,13 @@ class Config {
     struct CircularScale : public Scale {
         CircularScale(int min, int max, int base, int roiLeftX, int roiLeftY,
                       int roiRightX, int roiRightY, const int middleX,
-                      const int middleY, const int radius, const std::string calculationType);
+                      const int middleY, const int radius,
+                      const int calculationType);
 
         const int middleX;
         const int middleY;
         const int radius;
-        const std::string calculationType;
+        const int calculationType;
         const int base;
     };
 

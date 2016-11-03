@@ -19,10 +19,12 @@ CircularDisplay::CircularDisplay()
     : middle(), pointer(), radius(), amount(), shownAmount(), countFrame() {
     countFrame = 0;
 };
-CircularDisplay::CircularDisplay(int radius, cv::Point middle, int min, int max, int base,
-                                 bool manual,std::string calculationType)
-    : middle(middle), pointer(), radius(radius), amount(), min(min), max(max), base(base),
-      shownAmount(), manual(manual), countFrame(), calculationType(calculationType) {
+CircularDisplay::CircularDisplay(int radius, cv::Point middle, int min, int max,
+                                 int base, bool manual,
+                                 int calculationType)
+    : middle(middle), pointer(), radius(radius), amount(), min(min), max(max),
+      base(base), shownAmount(), manual(manual), countFrame(),
+      calculationType(calculationType) {
     countFrame = 0;
 };
 
@@ -69,10 +71,9 @@ void CircularDisplay::analyze(Mat img) {
     res = getLineAndScale(img);
     calculate(res);
     double a;
-    if (calculationType == "linear"){
-         a = getLinearAmount(min, max);
-    }
-    else if (calculationType == "logarithmic"){
+    if (calculationType == 0) {
+        a = getLinearAmount(min, max);
+    } else if (calculationType == 1) {
         a = getLogarithmicAmount(min, max, base);
     }
     std::cout << a << " amount" << std::endl;
@@ -91,15 +92,15 @@ Mat CircularDisplay::getLineAndScale(Mat src) {
     circle(c, middle, radius, Scalar(255, 255, 255), 3, 8, 0);
     if (manual) {
         imshow("c", c);
-        waitKey(0);
-        imshow("l", l);
+        imshow("line rec", l);
         waitKey(0);
         destroyWindow("c");
-        destroyWindow("l");
+        destroyWindow("line rec");
+    
     }
     circle(l, middle, radius, Scalar(255, 255, 255));
     if (manual) {
-        imshow("l", l);
+        imshow("circle and line", l);
         waitKey(0);
     }
     return l;
@@ -144,12 +145,11 @@ Mat CircularDisplay::getLines(Mat img) {
     Mat dest, edges, result, middlelines;
     std::vector<Vec4i> lines, second_lines;
 
-   
     if (countFrame != 0) {
-        threshold(img, img, 60, 250, THRESH_BINARY);
+        threshold(img, img, 55, 250, THRESH_BINARY);
 
     } else {
-        threshold(img, img, 140, 250, THRESH_BINARY);
+        threshold(img, img, 190, 250, THRESH_BINARY);
 
         cvtColor(img, img, CV_BGR2GRAY);
     }
@@ -157,24 +157,26 @@ Mat CircularDisplay::getLines(Mat img) {
         imshow(progress, img);
         waitKey(0);
     }
-    fastNlMeansDenoising(img, img, 30);
+    fastNlMeansDenoising(img, edges, 40);
 
     if (manual) {
         imshow(progress, img);
         waitKey(0);
     }
-    Canny(img, edges, 50, 200, 3, true);
+    if (countFrame == 0){
+    Canny(edges, edges, 50, 200, 3, true);
+    }
     if (manual) {
         imshow(progress, edges);
         waitKey(0);
         destroyWindow(progress);
     }
-    HoughLinesP(img, lines, 1, CV_PI / 180, 50, 50, 1);
+    HoughLinesP(edges, lines, 1, CV_PI / 180, 20, 50, 1);
 
     result = Mat(img.rows, img.cols, CV_8UC1);
     middlelines = Mat(img.rows, img.cols, CV_8UC1);
     Mat firstalllines = Mat(img.rows, img.cols, CV_8UC1);
-    
+
     for (size_t i = 0; i < lines.size(); i++) {
         Vec4i l = lines[i];
         if (manual) {
@@ -182,22 +184,20 @@ Mat CircularDisplay::getLines(Mat img) {
         }
         line(middlelines, Point(l[0], l[1]), Point(l[2], l[3]),
              Scalar(255, 255, 255), 2, 8, 0);
-        line(firstalllines, middle, Point(l[2], l[3]),
-             Scalar(255, 255, 255), 2, 8, 0);
-
-        
+        line(firstalllines, middle, Point(l[2], l[3]), Scalar(255, 255, 255), 2,
+             8, 0);
     }
-    if ((lines.size() != 0) && (lines.size() < 10) && (countFrame != 0)) {
+    if (((lines.size() != 0) && (lines.size() < 10) && (countFrame != 0)) || (lines.size() == 1)) {
 
         pointer = Point(lines[0][2], lines[0][3]);
-        line(result, pointer, middle, Scalar(0, 0, 0), 2, 8, 0);
+        line(result, pointer, middle, Scalar(255, 255, 255), 2, 8, 0);
 
     } else if (countFrame != 0) {
         pointer = Point(-1, -1);
     }
-    
+
     else {
-        if(manual){
+        if (manual) {
             imshow("middle", middlelines);
             imshow("test", firstalllines);
             waitKey(0);
@@ -212,10 +212,16 @@ Mat CircularDisplay::getLines(Mat img) {
             line(firstalllines, Point(b[0], b[1]), Point(b[2], b[3]),
                  Scalar(255, 255, 255), 2, 8, 0);
         }
-        pointer = Point(second_lines[0][2], second_lines[0][3]);
-        line(result, pointer, middle, Scalar(0, 0, 0), 2, 8, 0);
+        if ((second_lines.size() != 0) && (second_lines.size() < 10)) {
+            
+            pointer = Point(second_lines[0][2], second_lines[0][3]);
+            line(result, pointer, middle, Scalar(0, 0, 0), 2, 8, 0);
+            
+        } else {
+            pointer = Point(-1, -1);
+        }
 
-        if(manual){
+        if (manual) {
             imshow("test", result);
             waitKey(0);
         }
@@ -239,7 +245,6 @@ void CircularDisplay::selectRegionOfInterest(Mat img) {
         std::cout << "Middle: " << middle << std::endl;
         std::cout << "Radius: " << radius << std::endl;
         destroyWindow(setConfig);
-
     }
 }
 

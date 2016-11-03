@@ -9,6 +9,8 @@
 #include "digitDisplay.hpp"
 #include <opencv2/opencv.hpp>
 #include <tesseract/baseapi.h>
+#include <string>
+
 
 using namespace cv;
 
@@ -91,9 +93,15 @@ void DigitDisplay::getText(Mat img) {
                    img.channels(), (int)img.step1());
     tess->Recognize(0);
     const char *out = tess->GetUTF8Text();
+    std::string outString = out;
     std::cout << out << std::endl;
+    std::remove( outString.begin() , outString.end(), " ");
+    std::cout << outString << std::endl;
 
     shownAmount = atof(out);
+    double testAmount = std::stod(outString);
+    std::cout << testAmount << std::endl;
+
     while (shownAmount > max) {
         shownAmount = shownAmount / 10;
     }

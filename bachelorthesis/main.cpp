@@ -9,9 +9,11 @@
 #include "Utils.hpp"
 #include "circularDisplay.hpp"
 #include "digitDisplay.hpp"
+
 #include <fstream>
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include "bgsegm.hpp"
 
 using namespace cv;
 
@@ -42,7 +44,8 @@ int main(int argc, const char *argv[]) {
                 auto scale = boost::get<Config::CircularScale>(scaleVariant);
                 CircularDisplay cd = CircularDisplay(
                     scale.radius, cv::Point(scale.middleX, scale.middleY),
-                    scale.min, scale.max, scale.base, config->is_manual(), scale.calculationType);
+                    scale.min, scale.max, scale.base, config->is_manual(),
+                    scale.calculationType);
                 cd.setROI(Rect(Point(scale.roiLeftX, scale.roiLeftY),
                                Point(scale.roiRightX, scale.roiRightY)));
                 cds.push_back(cd);
@@ -56,7 +59,8 @@ int main(int argc, const char *argv[]) {
                 dds.push_back(dd);
             }
         }
-        auto mog = createBackgroundSubtractorMOG2();
+        Ptr<BackgroundSubtractor> mog;
+        mog = bgsegm::createBackgroundSubtractorMOG();
         VideoCapture vid(srcUrl);
         if (config->is_video()) {
 
@@ -87,7 +91,7 @@ int main(int argc, const char *argv[]) {
                 break;
             }
 
-            for (int i = 0; i < cds.size(); i++) {
+          /*  for (int i = 0; i < cds.size(); i++) {
                 if (!cds[i].roiIsset()) {
                     cds[i].selectRegionOfInterest(src);
                 }
@@ -103,16 +107,24 @@ int main(int argc, const char *argv[]) {
                     isfirst = false;
                 } else {
                     cds[i].analyze(bg);
+                    
                 }
-                resultFile << cds[i].getAmount();
-            }
+                if (cds[i].getAmount() == 0){
+                  //  imshow("ERROR",bg);
+                  //  waitKey(0);
+                }
+                else{
+                    resultFile << cds[i].getAmount();
+
+                }
+            }*/
 
             for (int i = 0; i < dds.size(); i++) {
                 if (!dds[i].roiIsset()) {
                     dds[i].selectRegionOfInterest(src);
                 }
-                 dds[i].analyze(src(dds[i].regionOfInterestRect()));
-                 resultFile << dds[i].getAmount() << "    ";
+                dds[i].analyze(src(dds[i].regionOfInterestRect()));
+                resultFile << dds[i].getAmount() << " ";
             }
             resultFile << std::endl;
             if (!config->is_video()) {
