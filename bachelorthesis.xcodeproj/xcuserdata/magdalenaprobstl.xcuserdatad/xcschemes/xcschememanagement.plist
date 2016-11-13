@@ -7,6 +7,14 @@
 		<key>Bachelorthesis 3.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< HEAD
+=======
+			<integer>3</integer>
+		</dict>
+		<key>bachelorthesis digital.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+>>>>>>> 477084602d28791b53631ec14b2b1fd8eebeaa6d
 			<integer>2</integer>
 		</dict>
 		<key>bachelorthesis.xcscheme</key>

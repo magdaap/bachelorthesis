@@ -45,9 +45,7 @@ class Config {
 
     struct DigitScale : public Scale {
         DigitScale(int min, int max, int roiLeftX, int roiLeftY, int roiRightX,
-                   int roiRightY, const int digitCount);
-
-        const int digitCount;
+                   int roiRightY);
     };
 
     using ScaleVariant = boost::variant<CircularScale, DigitScale>;

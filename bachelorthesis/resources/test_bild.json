@@ -13,7 +13,11 @@
       "roiRightX":530,
       "roiRightY":234,
       "radius": 319,
+<<<<<<< HEAD
       "calculationType": "linear",
+=======
+      "calculationType": 0,
+>>>>>>> 477084602d28791b53631ec14b2b1fd8eebeaa6d
       "base": 0
     }
   ],
