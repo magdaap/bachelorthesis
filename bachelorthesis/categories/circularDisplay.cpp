@@ -150,8 +150,10 @@ Mat CircularDisplay::getLines(Mat img) {
 
     } else {
         threshold(img, img, 190, 250, THRESH_BINARY);
-
+        try{
         cvtColor(img, img, CV_BGR2GRAY);
+        } catch (std::exception &e){
+        }
     }
     if (manual) {
         imshow(progress, img);

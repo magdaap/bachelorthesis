@@ -19,13 +19,12 @@ Config::CircularScale::CircularScale(int min, int max, int base, int roiLeftX,
                                      const int radius,
                                      const int calculationType)
     : Scale(min, max, roiLeftX, roiLeftY, roiRightX, roiRightY),
-      middleX(middleX), middleY(middleY), radius(radius), base(base), calculationType(calculationType) {}
+      middleX(middleX), middleY(middleY), radius(radius), base(base),
+      calculationType(calculationType) {}
 
 Config::DigitScale::DigitScale(int min, int max, int roiLeftX, int roiLeftY,
-                               int roiRightX, int roiRightY,
-                               const int digitCount)
-    : Scale(min, max, roiLeftX, roiLeftY, roiRightX, roiRightY),
-      digitCount(digitCount) {}
+                               int roiRightX, int roiRightY)
+    : Scale(min, max, roiLeftX, roiLeftY, roiRightX, roiRightY) {}
 
 bool Config::is_manual() const { return manual; }
 

@@ -10,10 +10,10 @@
 #include "circularDisplay.hpp"
 #include "digitDisplay.hpp"
 
+#include "bgsegm.hpp"
 #include <fstream>
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include "bgsegm.hpp"
 
 using namespace cv;
 
@@ -75,6 +75,10 @@ int main(int argc, const char *argv[]) {
 
         std::ofstream resultFile;
         resultFile.open("resources/results.txt");
+        VideoWriter outputVideo("resources/result.avi", CV_FOURCC('m', 'p', '4', 'v'),
+                         vid.get(CV_CAP_PROP_FPS),
+                         Size(vid.get(CV_CAP_PROP_FRAME_WIDTH),
+                              vid.get(CV_CAP_PROP_FRAME_HEIGHT)));
 
         bool isfirst = true;
         while (true) {
@@ -83,15 +87,20 @@ int main(int argc, const char *argv[]) {
                 vid.read(src);
             } else {
                 src = imread(srcUrl);
-                cvtColor(src, src, CV_BGR2GRAY);
+                try {
+                    cvtColor(src, src, CV_BGR2GRAY);
+                } catch (std::exception &e) {
+                }
             }
 
             if ((src.rows <= 0) || (src.cols <= 0)) {
                 std::cout << "Video is finished." << std::endl;
                 break;
             }
+            Mat temp;
+            src.copyTo(temp);
 
-          /*  for (int i = 0; i < cds.size(); i++) {
+            for (int i = 0; i < cds.size(); i++) {
                 if (!cds[i].roiIsset()) {
                     cds[i].selectRegionOfInterest(src);
                 }
@@ -107,31 +116,45 @@ int main(int argc, const char *argv[]) {
                     isfirst = false;
                 } else {
                     cds[i].analyze(bg);
-                    
                 }
-                if (cds[i].getAmount() == 0){
-                  //  imshow("ERROR",bg);
-                  //  waitKey(0);
-                }
-                else{
-                    resultFile << cds[i].getAmount();
+                if (cds[i].getAmount() != 0) {
+                    resultFile << cds[i].getAmount() << "   ";
 
+                    std::string t = std::to_string(cds[i].getAmount());
+
+                    putText(temp, t, Point(cds[i].regionOfInterestRect().tl().x,cds[i].regionOfInterestRect().tl().y+20) ,
+                            FONT_HERSHEY_SIMPLEX, 1, Scalar(0), 3);
+                  
                 }
-            }*/
+            }
 
             for (int i = 0; i < dds.size(); i++) {
                 if (!dds[i].roiIsset()) {
                     dds[i].selectRegionOfInterest(src);
                 }
                 dds[i].analyze(src(dds[i].regionOfInterestRect()));
-                resultFile << dds[i].getAmount() << " ";
+                resultFile << dds[i].getAmount() << "   ";
+                std::string t = std::to_string(dds[i].getAmount());
+
+                putText(temp, t, Point(dds[i].regionOfInterestRect().tl().x,dds[i].regionOfInterestRect().tl().y+20),
+                        FONT_HERSHEY_SIMPLEX, 1, Scalar(0), 3);
+            }
+            if (config->is_video()) {
+                if (!outputVideo.isOpened()){
+                    std::cout << "AHHHHHH" <<std::endl;
+                }
+                outputVideo.write(temp);
             }
             resultFile << std::endl;
             if (!config->is_video()) {
+               
+                imwrite("resources/result.jpg", temp);
+                
                 break;
             }
         }
         resultFile.close();
+
         return 0;
 
     } catch (std::exception &e) {

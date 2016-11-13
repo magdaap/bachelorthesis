@@ -45,14 +45,11 @@ std::shared_ptr<Config::Config> readConfig(const char *url) {
             config->addScale(Config::CircularScale(
                 min, max, scale.get<int>("base"), roiLeftX, roiLeftY, roiRightX,
                 roiRightY, scale.get<int>("middleX"), scale.get<int>("middleY"),
-                scale.get<int>("radius"),
-                scale.get<int>("calculationType")));
+                scale.get<int>("radius"), scale.get<int>("calculationType")));
         } else if (type == "digital") {
             // Here we have digital
             config->addScale(Config::DigitScale(min, max, roiLeftX, roiLeftY,
-                                                roiRightX, roiRightY,
-                                                // Digigal-only variable
-                                                scale.get<int>("digitCount")));
+                                                roiRightX, roiRightY));
         } else {
             // Throw on unsupported scale type
             throw std::runtime_error("Unsupported scale type: " + type);
